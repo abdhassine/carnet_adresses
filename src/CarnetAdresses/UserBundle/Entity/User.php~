@@ -28,21 +28,26 @@ class User extends BaseUser {
      * @ORM\Column(name="surname", type="string", length=30, nullable=false)
      */
     private $surname;
+    
+    /**
+     * @ORM\Column(name="address", type="string")
+     */
+    private $address;
+    
+    /**
+     * @ORM\Column(name="phonenumber", type="string", length=10)
+     */
+    private $phonenumber;
 
     /**
      * @ORM\Column(name="siteweb", type="string", nullable=true)
      */
     private $siteweb = null;
     
-    /**
-     * @ORM\OneToOne(targetEntity="AddressBook")
-     * @ORM\JoinColumn(name="id_addressbook", referencedColumnName="id_addressbook")
-     */
-    private $addressBook;
-    
 
     public function __construct() {
         parent::__construct();
+        $this->addressBook = new AddressBook();
     }
 
     
@@ -116,28 +121,5 @@ class User extends BaseUser {
      */
     public function getSurname() {
         return $this->surname;
-    }
-
-
-    /**
-     * Set addressBook
-     *
-     * @param \CarnetAdresses\UserBundle\Entity\AddressBook $addressBook
-     * @return User
-     */
-    public function setAddressBook(AddressBook $addressBook = null) {
-        $this->addressBook = $addressBook;
-
-        return $this;
-    }
-
-    /**
-     * Get addressBook
-     *
-     * @return \CarnetAdresses\UserBundle\Entity\AdressBook 
-     */
-    public function getAddressBook()
-    {
-        return $this->addressBook;
     }
 }

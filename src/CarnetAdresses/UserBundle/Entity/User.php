@@ -28,6 +28,16 @@ class User extends BaseUser {
      * @ORM\Column(name="surname", type="string", length=30, nullable=false)
      */
     private $surname;
+    
+    /**
+     * @ORM\Column(name="address", type="string")
+     */
+    private $address;
+    
+    /**
+     * @ORM\Column(name="phonenumber", type="string", length=10)
+     */
+    private $phonenumber;
 
     /**
      * @ORM\Column(name="siteweb", type="string", nullable=true)
@@ -111,5 +121,47 @@ class User extends BaseUser {
      */
     public function getSurname() {
         return $this->surname;
+    }
+
+    
+    /**
+     * Set address
+     *
+     * @param string $address
+     * @return User
+     */
+    public function setAddress($address) {
+        $this->address = $address;
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string 
+     */
+    public function getAddress() {
+        return $this->address;
+    }
+
+    
+    /**
+     * Set phonenumber
+     *
+     * @param string $phonenumber
+     * @return User
+     */
+    public function setPhonenumber($phonenumber) {
+        $this->phonenumber = $phonenumber;
+        return $this;
+    }
+
+    /**
+     * Get phonenumber
+     *
+     * @return string 
+     */
+    public function getPhonenumber() {
+        return $this->phonenumber;
     }
 }

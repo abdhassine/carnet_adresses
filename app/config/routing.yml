@@ -1,0 +1,9 @@
+carnet_adresses_app:
+    resource: "@CarnetAdressesAppBundle/Resources/config/routing.yml"
+    prefix:   /
+
+carnet_adresses_user:
+    resource: "@CarnetAdressesUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+

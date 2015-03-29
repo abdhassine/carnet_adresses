@@ -1,0 +1,22 @@
+# src/CarnetAdresses/UserBundle/Resources/config/config.yml
+security:
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
+
+    firewalls:
+        dev:
+            pattern: ^/_(profiler|wdt)/
+            security: false
+        
+        main:
+            pattern: ^/
+            form_login:
+                login_path: /
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+            logout:       true
+            anonymous:    true

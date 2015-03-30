@@ -101,5 +101,20 @@ class AddressBook {
     public function getContacts() {
         return $this->contacts;
     }
+    
+    /**
+     * Renvoie le contact dont l'Id correspond à l'Id spécifié en paramètre.
+     * Si l'Id ne correspond à aucun contact, renvoie null. 
+     * @param type $id
+     * @return User or null
+     */
+    public function getContact($id) {
+        foreach($this->contacts as $contact) {
+            if ($contact->getId() === $id) {
+                return $contact;
+            }
+        }
+        return null;
+    }
 
 }

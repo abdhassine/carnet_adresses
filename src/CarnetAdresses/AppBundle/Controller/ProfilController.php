@@ -2,12 +2,13 @@
 
 namespace CarnetAdresses\AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
-class ProfilController extends Controller {
-    
+class ProfilController extends ContainerAware {
+
     /**
      * Renvoie la vue de la page de profil de l'utilisateur spécifié par son
      * username en paramètre.
@@ -17,7 +18,7 @@ class ProfilController extends Controller {
      * @throws NotFoundHttpException if there is no user to return
      */
     public function viewAction($username) {
-        $repository = $this->getDoctrine()->getManager()
+        $repository = $this->container->get('doctrine')
                 ->getRepository('CarnetAdressesUserBundle:User');
         
         $user = $repository->findOneBy(array('username' => $username));
@@ -25,23 +26,23 @@ class ProfilController extends Controller {
             throw new NotFoundHttpException("Le profil de $username n\'existe pas.");
         }
         
-        $content = $this->get('templating')
-                ->render('CarnetAdressesAppBundle:Front:profil.html.twig',
+        $content = $this->container->get('templating')
+                ->renderResponse('CarnetAdressesAppBundle:Front:profil.html.twig',
                         array(
                             'username' => $username,
-                            'userInfo' => $user
+                            'user'     => $user
                 ));
-        return new Response($content);
+        return $content;
     }
 
     
     public function clickOnAddAction() {
-       return $this->redirect($this->generateUrl('carnet_app_ajouter'));
+       return new RedirectResponse($this->container->get('router')->generate('carnet_app_ajouter'));
     }
     
     
     public function clickOnListingAction($username) {
-        return $this->redirect($this->generateUrl('carnet_app_ajouter', array('username' => $username)));
+        return new RedirectResponse($this->container->get('router')->generate('carnet_app_ajouter', array('username' => $username)));
     }
 
 }

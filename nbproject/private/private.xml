@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/html/carnet_adresses/app/AppKernel.php</file>
+            <file>file:/var/www/html/carnet_adresses/src/CarnetAdresses/UserBundle/Entity/AddressBook.php</file>
+            <file>file:/var/www/html/carnet_adresses/src/CarnetAdresses/AppBundle/Controller/FrontController.php</file>
             <file>file:/var/www/html/carnet_adresses/src/CarnetAdresses/UserBundle/Entity/User.php</file>
-            <file>file:/var/www/html/carnet_adresses/src/CarnetAdresses/UserBundle/Resources/config/security.yml</file>
-            <file>file:/var/www/html/carnet_adresses/app/config/security.yml</file>
+            <file>file:/var/www/html/carnet_adresses/src/CarnetAdresses/UserBundle/Entity/AddressBookRepository.php</file>
+            <file>file:/var/www/html/carnet_adresses/README.md</file>
+            <file>file:/var/www/html/carnet_adresses/src/CarnetAdresses/AppBundle/Controller/ProfilController.php</file>
+            <file>file:/var/www/html/carnet_adresses/src/CarnetAdresses/AppBundle/Controller/IndexController.php</file>
         </group>
     </open-files>
 </project-private>

@@ -30,12 +30,12 @@ class User extends BaseUser {
     private $surname;
     
     /**
-     * @ORM\Column(name="address", type="string")
+     * @ORM\Column(name="address", type="string", nullable=true)
      */
     private $address;
     
     /**
-     * @ORM\Column(name="phonenumber", type="string", length=10)
+     * @ORM\Column(name="phonenumber", type="string", length=10, nullable=true)
      */
     private $phonenumber;
 
@@ -47,7 +47,6 @@ class User extends BaseUser {
 
     public function __construct() {
         parent::__construct();
-        $this->addressBook = new AddressBook();
     }
 
     
@@ -163,5 +162,21 @@ class User extends BaseUser {
      */
     public function getPhonenumber() {
         return $this->phonenumber;
+    }
+    
+    
+    /**
+     * Renvoie une représentation du User sous forme de string.
+     * 
+     * @return string
+     */
+    public function __toString() {
+        $str = parent::__toString().'<br />';
+        $str .= $this->email.'<br />'
+            .$this->firstname.' '.$this->lastname.'<br />'
+            .((isset($this->address)) ? $this->address.'<br />' : '')
+            .((isset($this->phonenumber)) ? $this->phonenumber.'<br />' : '')
+            .((isset($this->siteweb)) ? $this->siteweb : '');
+        return (string)$str;
     }
 }

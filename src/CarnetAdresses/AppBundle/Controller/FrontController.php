@@ -14,8 +14,7 @@ class FrontController extends Controller {
     
     
     public function profilAction($username) {
-       $response = $this->forward('CarnetAdressesAppBundle:Profil:viewAction',
-               array('username' => $username));
+       $response = $this->forward('profil_controller:viewAction', array('username' => $username));
        return $response;
     }
     

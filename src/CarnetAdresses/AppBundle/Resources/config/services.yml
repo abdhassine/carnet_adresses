@@ -2,3 +2,10 @@ services:
 #    carnet_adresses_app.example:
 #        class: CarnetAdresses\AppBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+    index_controller:
+        class: CarnetAdresses\AppBundle\IndexController
+        
+    profil_controller:
+        class: CarnetAdresses\AppBundle\ProfilController
+        calls:
+            - [setContainer, [@service_container]]

@@ -8,8 +8,10 @@
             <file>file:/var/www/html/carnet_adresses/src/CarnetAdresses/UserBundle/Entity/User.php</file>
             <file>file:/var/www/html/carnet_adresses/src/CarnetAdresses/UserBundle/Entity/AddressBookRepository.php</file>
             <file>file:/var/www/html/carnet_adresses/README.md</file>
+            <file>file:/var/www/html/carnet_adresses/src/CarnetAdresses/AppBundle/Controller/ListingController.php</file>
             <file>file:/var/www/html/carnet_adresses/src/CarnetAdresses/AppBundle/Controller/ProfilController.php</file>
-            <file>file:/var/www/html/carnet_adresses/src/CarnetAdresses/AppBundle/Controller/IndexController.php</file>
+            <file>file:/var/www/html/carnet_adresses/src/CarnetAdresses/AppBundle/Resources/config/services.yml</file>
+            <file>file:/var/www/html/carnet_adresses/src/CarnetAdresses/UserBundle/Form/AddressBookType.php</file>
         </group>
     </open-files>
 </project-private>

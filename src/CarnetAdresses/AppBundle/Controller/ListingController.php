@@ -2,17 +2,33 @@
 
 namespace CarnetAdresses\AppBundle\Controller;
 
-use Symfony\Component\DependencyInjection\ContainerAware;
+use Doctrine\ORM\EntityManager;
+use Symfony\Component\Templating\EngineInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Routing\Router;
 use Symfony\Component\Translation\Exception\NotFoundResourceException;
 
 
-class ListingController extends ContainerAware {
+class ListingController {
+    private $em;
+    private $templating;
+    private $formFactory;
+    private $router;
+    
+    
+    public function __construct(EntityManager $em, EngineInterface $templating, FormFactory $formFactory, Router $router) {
+        $this->em = $em;
+        $this->templating = $templating;
+        $this->formFactory = $formFactory;
+        $this->router = $router;
+    }
+
 
     public function viewAction($username) {
-        $repository = $this->container->get('doctrine')->getManager()
-                ->getRepository('CarnetAdressesUserBundle:AdressBook');
+        $repository = $this->em->getRepository('CarnetAdressesUserBundle:AddressBook');
         $contacts = $repository->findAllContactsOf($username);
-        $content = $this->get('templating')->renderResponse('CarnetAdressesAppBundle:Front:listing.html.twig',
+        $content = $this->templating->renderResponse('CarnetAdressesAppBundle:Front:listing.html.twig',
                 array('contacts' => $contacts));
         
         return new $content;
@@ -20,9 +36,8 @@ class ListingController extends ContainerAware {
     
     
     public function deleteAction($username, array $ids) {
-        $em = $this->container->get('doctrine')->getManager();
-        $userRepo = $em->getRepository('CarnetAdressesUserBundle:User');
-        $abRepo = $em->getRepository('CarnetAdressesUserBundle:AddressBook');
+        $userRepo = $this->em->getRepository('CarnetAdressesUserBundle:User');
+        $abRepo = $this->em->getRepository('CarnetAdressesUserBundle:AddressBook');
         
         $owner = $userRepo->findBy($username);
         $addressBook = $abRepo->findBy($owner);
@@ -40,7 +55,7 @@ class ListingController extends ContainerAware {
         $em->persist($addressBook);
         $em->flush();
         
-        return new RedirectResponse($this->container->get('router')->generate('carnet_app_listing'));
+        return new RedirectResponse($this->router->generate('carnet_app_listing'));
     }
 
 }

@@ -2,22 +2,36 @@
 
 namespace CarnetAdresses\AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Security\Core\SecurityContext;
+use Doctrine\ORM\EntityManager;
+use Symfony\Component\Templating\EngineInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Routing\Router;
 
 use CarnetAdresses\UserBundle\Entity\User;
 use CarnetAdresses\UserBundle\Form\UserType;
 
 
-class IndexController extends Controller {
+class IndexController {
+    private $em;
+    private $templating;
+    private $formFactory;
+    private $router;
+    
+    
+    public function __construct(EntityManager $em, EngineInterface $templating, FormFactory $formFactory, Router $router) {
+        $this->em = $em;
+        $this->templating = $templating;
+        $this->formFactory = $formFactory;
+        $this->router = $router;
+    }
     
     /**
      * Revoie la vue de la page d'index.
      */
     public function viewAction() {
-        $content = $this->get('templating')
-                ->render('CarnetAdressesAppBundle:Front:index.html.twig');
-        return new Response($content);
+        $content = $this->templating->renderResponse('CarnetAdressesAppBundle:Front:index.html.twig');
+        return $content;
     }
     
     /**
@@ -33,7 +47,7 @@ class IndexController extends Controller {
      */
     public function subscribeAction(Request $request) {
         $user = new User();
-        $subscribeForm = $this->createForm(new UserType(), $user);
+        $subscribeForm = $this->formFactory->create(new UserType(), $user);
         
         if ($subscribeForm->handleRequest($request)->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -42,18 +56,19 @@ class IndexController extends Controller {
             
             $request->getSession()->getFlashBag()->add('notice', 'Vous êtes bien inscrit.');
             
-            return $this->redirect($this->generateUrl('carnet_app_profil', 
+            return new RedirectResponse($this->render->generate('carnet_app_profil',
                     array(
                         'username' => $user->getUsername(),
+                        'user'     => $user,
             )));
         }
         
-        $content = $this->get('templating')->render('CarnetAdressesAppBundle:Front:index.html.twig',
+        $content = $this->templating->renderResponse('CarnetAdressesAppBundle:Front:index.html.twig',
                 array(
                     'subscribeForm' => $subscribeForm->createView(),
         ));
         
-        return new Response($content);
+        return $content;
     }
 
 }

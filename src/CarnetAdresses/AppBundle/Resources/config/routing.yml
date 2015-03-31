@@ -12,11 +12,10 @@ carnet_app_profil:
 
 # route vers la page d'ajout d'un contact : ajouter.html.twig
 carnet_app_ajouter:
-    path: /ajouter/
+    path: /ajouter/{username}
     defaults: { _controller: 'CarnetAdressesAppBundle:Front:ajouter' }
 
-# route vers la page de listing des contacts de 'username'
+# route vers la page de listing des contacts de 'username' : listing.html.twig
 carnet_app_listing:
     path: /listing/{username}
     defaults: { _controller: 'CarnetAdressesAppBundle:Front:listing' }
-

@@ -4,6 +4,8 @@ services:
 #        arguments: [@service_id, "plain_value", %parameter%]
     index_controller:
         class: CarnetAdresses\AppBundle\IndexController
+        calls:
+            - [setContainer, [@service_container]]
         
     profil_controller:
         class: CarnetAdresses\AppBundle\ProfilController

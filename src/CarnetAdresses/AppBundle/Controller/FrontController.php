@@ -8,28 +8,46 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class FrontController extends Controller {
 
     public function indexAction() {
-       $response = $this->forward('CarnetAdressesAppBundle:Index:viewAction');
-       return $response;
+       $controller = new IndexController(
+               $this->getDoctrine()->getEntityManager(), 
+               $this->get('templating'),
+               $this->get('form.factory'),
+               $this->get('router')
+        );
+       
+       return $controller->viewAction();
     }
     
     
     public function profilAction($username) {
-       $response = $this->forward('profil_controller:viewAction', array('username' => $username));
-       return $response;
+        $controller = new ProfilController(
+                $this->getDoctrine()->getEntityManager(), 
+                $this->get('templating'),
+                $this->get('router')
+        );
+        
+        return $controller->viewAction($username);
     }
     
     
-    public function ajouterAction() {
+    public function ajouterAction($username) {
         
     }
     
     
-    public function listingAction() {
+    public function listingAction($username) {
+        $controller = new ListingController(
+               $this->getDoctrine()->getEntityManager(), 
+               $this->get('templating'),
+               $this->get('form.factory'),
+               $this->get('router')
+        );
         
+        return $controller->viewAction($username);
     }
     
     
-    public function logoutAction() {
+    public function logoutAction($username) {
         
     }
 

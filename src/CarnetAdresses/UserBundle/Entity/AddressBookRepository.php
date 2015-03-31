@@ -22,7 +22,7 @@ class AddressBookRepository extends EntityRepository {
     public function findAllContactsOf($username) {
         $builder = $this->createQueryBuilder('ab.contacts');
         $builder->join('ab.owner', 'owner')
-                ->selectAdd('owner')
+                ->addSelect('owner')
                 ->where('owner.username = :username')
                 ->setParameter('username', $username);
         

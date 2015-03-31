@@ -50,9 +50,8 @@ class IndexController {
         $subscribeForm = $this->formFactory->create(new UserType(), $user);
         
         if ($subscribeForm->handleRequest($request)->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
+            $this->em->persist($user);
+            $this->em->flush();
             
             $request->getSession()->getFlashBag()->add('notice', 'Vous êtes bien inscrit.');
             

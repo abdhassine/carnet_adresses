@@ -30,8 +30,8 @@ class IndexController {
      * Revoie la vue de la page d'index.
      */
     public function viewAction() {
-        $content = $this->templating->renderResponse('CarnetAdressesAppBundle:Front:index.html.twig');
-        return $content;
+        return $this->templating->
+                renderResponse('CarnetAdressesAppBundle:Front:index.html.twig');
     }
     
     /**
@@ -57,8 +57,8 @@ class IndexController {
             
             return new RedirectResponse($this->render->generate('carnet_app_profil',
                     array(
-                        'username' => $user->getUsername(),
-                        'user'     => $user,
+                        'username'      => $user->getUsername(),
+                        'user'          => $user,
             )));
         }
         

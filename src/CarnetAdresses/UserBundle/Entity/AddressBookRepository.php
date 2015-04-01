@@ -19,13 +19,11 @@ class AddressBookRepository extends EntityRepository {
      * @param string username
      * @return array of User
      */
-    public function findAllContactsOf($username) {
-        $builder = $this->createQueryBuilder('ab.contacts');
-        $builder->join('ab.owner', 'owner')
-                ->addSelect('owner')
-                ->where('owner.username = :username')
-                ->setParameter('username', $username);
+    public function findAddressBookOf(User $user) {
+        $builder = $this->createQueryBuilder('ab');
+        $builder->where('ab.owner = :owner')
+                ->setParameter('owner', $user);
         
-       return $builder->getQuery()->getResult();
+       return $builder->getQuery()->getOneOrNullResult();
     }
 }

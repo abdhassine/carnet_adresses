@@ -4,6 +4,7 @@ namespace CarnetAdresses\AppBundle\Controller;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\Routing\Router;
@@ -45,6 +46,38 @@ class ProfilController {
                             'user'     => $user,
                 ));
         return $content;
+    }
+    
+    
+    /**
+     * Action liée à l'édition du Profil de l'utilsateur spécifié par son username.
+     * 
+     * @param Request $request
+     * @param string  $username
+     * @throws NotFoundHttpException
+     */
+    public function editAction(Request $request, $username) {
+        $repository = $this->em->getRepository('CarnetAdressesUserBundle:User');
+        
+        $user = $repository->findOneBy(array('username' => $username));
+        if (!$user) {
+            throw new NotFoundHttpException("Le profil de $username n'existe pas.");
+        }
+        
+        $editForm = $this->formFactory->create(new UserEditType(), $user);
+        if ($editForm->handleRequest($request)->isValid()) {
+            $this->em->persist($user);
+            $this->em->flush();
+            
+            $request->getSession()->getFlashBag()->add('notice', 'Votre profil a bien été modifié.');
+        }
+        
+        return new RedirectResponse($this->render->generate('carnet_app_profil',
+                array(
+                    'username' => $user->getUsername(),
+                    'user'     => $user,
+                    'editForm' => $editForm->createView(),
+        )));
     }
 
     

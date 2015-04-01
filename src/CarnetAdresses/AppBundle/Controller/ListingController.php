@@ -26,12 +26,23 @@ class ListingController {
 
 
     public function viewAction($username) {
-        $repository = $this->em->getRepository('CarnetAdressesUserBundle:AddressBook');
-        $contacts = $repository->findAllContactsOf($username);
-        $content = $this->templating->renderResponse('CarnetAdressesAppBundle:Front:listing.html.twig',
-                array('contacts' => $contacts));
+        $userRepo = $this->em->getRepository('CarnetAdressesUserBundle:User');
+        $owner = $userRepo->findOneBy(array('username' => $username));
         
-        return new $content;
+        $abRepo = $this->em->getRepository('CarnetAdressesUserBundle:AddressBook');
+        $addressBook = $abRepo->findAddressBookOf($owner);
+        
+        if (!$addressBook) {
+            return $this->templating->renderResponse('CarnetAdressesAppBundle:Front:listing.html.twig',
+                array(
+                    'contacts' => array(),
+            ));
+        }
+        
+        return $this->templating->renderResponse('CarnetAdressesAppBundle:Front:listing.html.twig',
+                array(
+                    'contacts' => $addressBook->getContacts(),
+            ));
     }
     
     
@@ -52,8 +63,8 @@ class ListingController {
             $addressBook->removeContact($user);
         }
         
-        $em->persist($addressBook);
-        $em->flush();
+        $this->em->persist($addressBook);
+        $this->em->flush();
         
         return new RedirectResponse($this->router->generate('carnet_app_listing'));
     }

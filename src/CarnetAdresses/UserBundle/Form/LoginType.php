@@ -7,22 +7,15 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 
-class UserType extends AbstractType {
+class LoginType extends AbstractType {
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-            ->add('username', 'text')
-            ->add('email', 'email')
-            ->add('emailconfirm', 'email')
+            ->add('login', 'text')
             ->add('password', 'password')
-            ->add('passwordconfirm', 'password')
-            ->add('firstname', 'text')
-            ->add('surname', 'text')
-            ->add('address', 'text')
-            ->add('subscribe', 'submit')
         ;
     }
     
@@ -41,6 +34,8 @@ class UserType extends AbstractType {
      * @return string
      */
     public function getName() {
-        return 'carnetadresses_userbundle_user';
+        return 'carnetadresses_userbundle_login';
     }
 }
+
+

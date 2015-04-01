@@ -2,17 +2,17 @@
 
 namespace CarnetAdresses\AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\DependencyInjection\ContainerAware;
 
 
-class FrontController extends Controller {
+class FrontController extends ContainerAware {
 
     public function indexAction() {
        $controller = new IndexController(
-               $this->getDoctrine()->getEntityManager(), 
-               $this->get('templating'),
-               $this->get('form.factory'),
-               $this->get('router')
+               $this->container->get('doctrine')->getEntityManager(), 
+               $this->container->get('templating'),
+               $this->container->get('form.factory'),
+               $this->container->get('router')
         );
        
        return $controller->viewAction();
@@ -21,9 +21,9 @@ class FrontController extends Controller {
     
     public function profilAction($username) {
         $controller = new ProfilController(
-                $this->getDoctrine()->getEntityManager(), 
-                $this->get('templating'),
-                $this->get('router')
+                $this->container->get('doctrine')->getEntityManager(), 
+                $this->container->get('templating'),
+                $this->container->get('router')
         );
         
         return $controller->viewAction($username);
@@ -37,10 +37,10 @@ class FrontController extends Controller {
     
     public function listingAction($username) {
         $controller = new ListingController(
-               $this->getDoctrine()->getEntityManager(), 
-               $this->get('templating'),
-               $this->get('form.factory'),
-               $this->get('router')
+               $this->container->get('doctrine')->getEntityManager(), 
+               $this->container->get('templating'),
+               $this->container->get('form.factory'),
+               $this->container->get('router')
         );
         
         return $controller->viewAction($username);

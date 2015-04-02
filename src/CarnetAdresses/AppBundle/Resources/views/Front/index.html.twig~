@@ -36,7 +36,6 @@
         
         <div class="col-md-8">
             {# formulaire d'inscription #}
-            
         </div>
     </div>
 {% endblock %}

@@ -15,28 +15,74 @@
             <div class="form-group">
                 <input type="password" name="password" placeholder="Password" class="form-control">
             </div>
-            <button type="submit" class="btn btn-success" method="post">Se connecter</button>
+            <button type="submit" class="btn btn-success btn-md">Se connecter</button>
         </form>
     </div>
 {% endblock %}
 
 
 {% block header %}
-	<h1>Bienvenue sur CarnetApp</h1>
+	<h2>Bienvenue sur CarnetApp</h2>
+        <p class="lead">
+            <small>Sur cette application, vous pouver créer un carnet d'adresses en ligne pour l'avoir toujours en main !</small>
+        </p>
 {% endblock %}
 
 {% block body %}
     {# mettre une petite description et inclure le formulaire d'inscription #}
     <div class="row">
-        <div class="col-md-4">
-            <p>
-                Cette application te permet d'avoir un carnet d'adresses en ligne.
-            </p>
-        </div>
-        
-        <div class="col-md-8">
-            {# formulaire d'inscription #}
-            
+        <div class="col-md-8 col-sm-offset-2">
+            <div class="well">
+                {{ form_start(subscribeForm, {'method':'POST'}) }}
+                    <legend>S'inscrire</legend>
+                    {{ form_errors(subscribeForm) }}
+                    <div class="form-group">
+                        {{ form_errors(subscribeForm.username) }}
+                        {{ form_widget(subscribeForm.username, 
+                            {'attr':{'class':'form-control input-lg', 'placeholder':'Pseudo'} }) }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form_errors(subscribeForm.email) }}
+                        {{ form_widget(subscribeForm.email, 
+                            {'attr':{'class':'form-control input-lg', 'placeholder':'Adresse e-mail'} }) }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form_errors(subscribeForm.plainPassword.password) }}
+                        {{ form_widget(subscribeForm.plainPassword.password, 
+                            {'attr':{'class':'form-control input-lg', 'placeholder':'Mot de passe'} }) }}
+                        {{ form_errors(subscribeForm.plainPassword.confirm) }}
+                        {{ form_widget(subscribeForm.plainPassword.confirm, 
+                            {'attr':{'class':'form-control input-lg ', 'placeholder':'Confirmer mot de passe'} }) }}
+                    </div> <br />
+                    
+                    <div class="form-group">
+                        <div class="form-inline">
+                            {{ form_errors(subscribeForm.firstname) }}
+                            {{ form_widget(subscribeForm.firstname, 
+                                {'attr':{'class':'form-control input-lg', 'placeholder':'Prénom'} }) }}
+                            {{ form_errors(subscribeForm.surname) }}
+                            {{ form_widget(subscribeForm.surname, 
+                                {'attr':{'class':'form-control input-lg', 'placeholder':'Nom de famille'} }) }}
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form_errors(subscribeForm.address) }}
+                        {{ form_widget(subscribeForm.address, 
+                            {'attr':{'class':'form-control input-lg', 'placeholder':'Adresse postale'} }) }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form_errors(subscribeForm.phonenumber) }}
+                        {{ form_widget(subscribeForm.phonenumber, 
+                            {'attr':{'class':'form-control input-lg', 'placeholder':'Numéro de téléphone'} }) }}
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success btn-lg">Confirmer l'inscription</button>
+                {{ form_end(subscribeForm) }}
+            </div>
         </div>
     </div>
 {% endblock %}

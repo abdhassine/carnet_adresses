@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use CarnetAdresses\UserBundle\Entity\AddressBookRepository;
+
 
 class AddressBookType extends AbstractType {
     /**
@@ -14,8 +16,11 @@ class AddressBookType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder->add('contacts', 'entity', array(
-            'class'         => 'CarnetAdressesUserBundle:User',
-            
+            'class'         => 'CarnetAdressesUserBundle:AddressBook',
+            'property'      => 'contacts',
+            'querybuilder'  => function(AddressBookRepository $r) use ($user) {
+                return $r->findAddressBookOf($user);
+            },
             'expanded'      => true,
             'multiple'      => true,
         ));

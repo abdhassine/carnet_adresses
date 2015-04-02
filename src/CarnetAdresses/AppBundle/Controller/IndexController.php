@@ -2,72 +2,64 @@
 
 namespace CarnetAdresses\AppBundle\Controller;
 
-use Doctrine\ORM\EntityManager;
-use Symfony\Component\Templating\EngineInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\FormFactory;
-use Symfony\Component\Routing\Router;
+use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 use CarnetAdresses\UserBundle\Entity\User;
 use CarnetAdresses\UserBundle\Form\UserType;
 
 
-class IndexController {
-    private $em;
-    private $templating;
-    private $formFactory;
-    private $router;
-    
-    
-    public function __construct(EntityManager $em, EngineInterface $templating, FormFactory $formFactory, Router $router) {
-        $this->em = $em;
-        $this->templating = $templating;
-        $this->formFactory = $formFactory;
-        $this->router = $router;
-    }
+class IndexController extends ContainerAware {
     
     /**
      * Revoie la vue de la page d'index.
      */
     public function viewAction() {
-        return $this->templating->
-                renderResponse('CarnetAdressesAppBundle:Front:index.html.twig');
+        // penser à la fonction isSubmitted pour les formulaires
+        // isClicked pour les boutons
+        return $this->subscribeAction();
     }
+    
     
     /**
      * Action liée à la connexion d'un utilisateur de l'application.
      */
-    public function loginAction(Request $request) {
-        
+    public function loginAction() {
+        $user = new User();
+        $loginForm = $this->container->get('form.factory')
+                ->create(new LoginType(), $user);
     }
 
     
     /**
      * Action liée à l'inscription d'un nouvel utilisateur sur l'application.
      */
-    public function subscribeAction(Request $request) {
+    public function subscribeAction() {
         $user = new User();
-        $subscribeForm = $this->formFactory->create(new UserType(), $user);
-        
-        if ($subscribeForm->handleRequest($request)->isValid()) {
-            $this->em->persist($user);
-            $this->em->flush();
-            
-            $request->getSession()->getFlashBag()->add('notice', 'Vous êtes bien inscrit.');
-            
-            return new RedirectResponse($this->render->generate('carnet_app_profil',
-                    array(
-                        'username'      => $user->getUsername(),
-                        'user'          => $user,
-            )));
+        $subscribeForm = $this->container->get('form.factory')
+                ->create(new UserType(), $user);
+        $request = $this->container->get('request_stack')
+                ->getCurrentRequest();
+
+        if ($request->getMethod() == 'POST') {
+            $subscribeForm->bind($request);
+
+            if ($subscribeForm->isValid()) {
+                $em = $this->container->get('doctrine')->getManager();
+                $em->persist($user);
+                $em->flush();
+
+                return new RedirectResponse($this->container->get('router')
+                                ->generate('carnet_app_profil', array(
+                                    'username' => $user->getUsername(),
+                )));
+            }
         }
         
-        $content = $this->templating->renderResponse('CarnetAdressesAppBundle:Front:index.html.twig',
-                array(
+        return $this->container->get('templating')
+                ->renderResponse('CarnetAdressesAppBundle:Front:index.html.twig', array(
                     'subscribeForm' => $subscribeForm->createView(),
-        ));
-        
-        return $content;
+                ));
     }
-
+   
 }

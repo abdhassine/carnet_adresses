@@ -2,31 +2,19 @@
 
 namespace CarnetAdresses\AppBundle\Controller;
 
-use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 
-class FrontController extends ContainerAware {
+class FrontController extends Controller {
 
     public function indexAction() {
-       $controller = new IndexController(
-               $this->container->get('doctrine')->getEntityManager(), 
-               $this->container->get('templating'),
-               $this->container->get('form.factory'),
-               $this->container->get('router')
-        );
-       
-       return $controller->viewAction();
+        return $this->forward('CarnetAdressesAppBundle:Index:view');
     }
     
     
     public function profilAction($username) {
-        $controller = new ProfilController(
-                $this->container->get('doctrine')->getEntityManager(), 
-                $this->container->get('templating'),
-                $this->container->get('router')
-        );
-        
-        return $controller->viewAction($username);
+       $response = $this->forward('CarnetAdressesAppBundle:Index:view');
+       return $response;
     }
     
     

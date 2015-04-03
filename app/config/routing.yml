@@ -5,5 +5,3 @@ carnet_adresses_app:
 carnet_adresses_user:
     resource: "@CarnetAdressesUserBundle/Resources/config/routing.yml"
     prefix:   /
-
-

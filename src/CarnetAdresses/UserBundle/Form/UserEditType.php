@@ -12,11 +12,8 @@ class UserEditType extends UserType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         parent::buildForm($builder, $options);
-        $builder->remove('emailconfirm')
-                ->remove('subscribe')
-                ->add('oldpassword', 'password')
+        $builder->add('oldpassword', 'password')
                 ->add('siteweb', 'url')
-                ->add('edit', 'submit')
         ;
     }
 

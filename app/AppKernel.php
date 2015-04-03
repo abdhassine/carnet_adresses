@@ -19,6 +19,9 @@ class AppKernel extends Kernel
             
             // Bundles importés
             new FOS\UserBundle\FOSUserBundle(),
+            new JMS\AopBundle\JMSAopBundle(),
+    		new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+    		new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             
             // Bundles personnels
             new CarnetAdresses\UserBundle\CarnetAdressesUserBundle(),

@@ -13,8 +13,7 @@ class FrontController extends Controller {
     
     
     public function profilAction($username) {
-       $response = $this->forward('CarnetAdressesAppBundle:Index:view');
-       return $response;
+       return $this->forward('CarnetAdressesAppBundle:Profil:profil', array('username' => $username));
     }
     
     
@@ -24,14 +23,7 @@ class FrontController extends Controller {
     
     
     public function listingAction($username) {
-        $controller = new ListingController(
-               $this->container->get('doctrine')->getEntityManager(), 
-               $this->container->get('templating'),
-               $this->container->get('form.factory'),
-               $this->container->get('router')
-        );
-        
-        return $controller->viewAction($username);
+    
     }
     
     

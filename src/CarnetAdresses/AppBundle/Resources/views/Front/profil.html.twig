@@ -1,7 +1,38 @@
-{% extends "::base.html.twig" %}
+{% extends "CarnetAdressesAppBundle::layout.html.twig" %}
 
-{% block title %}Carnet d'adresses{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Front:profil page {{ username }}</h1>
+{% block title %}
+    {{ parent() }} - Profil de {{ user.username }}
+{% endblock %}
+
+
+{% block menubar %}
+{% endblock %}
+
+
+{% block header %}
+    {{ parent() }}
+    <h3> Profil du membre {{ user.username }}</h3>
+{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-4 well">
+            <h3><i>Vos informations personnelles</i></h3>
+            <p class="">
+                <b>{{ user.firstname }} {{ user.surname }}</b> <br/>
+                {{ user.email }} <br/>
+                {{ user.address }} <br/>
+                {{ user.phonenumber }} <br/>
+                {% if user.siteweb %}
+                    <a href="{{ user.siteweb }}" target="_blank">{{ user.siteweb }}</a>
+                {% endif %}
+            </p>
+        </div>
+        
+        <div class="col-md-6 col-sm-offset-2">
+            Coucou !
+        </div>
+    </div>
 {% endblock %}

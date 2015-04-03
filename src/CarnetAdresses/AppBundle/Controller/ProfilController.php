@@ -3,25 +3,13 @@
 namespace CarnetAdresses\AppBundle\Controller;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Translation\Exception\NotFoundResourceException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\ORM\EntityManager;
-use Symfony\Component\Templating\EngineInterface;
-use Symfony\Component\Routing\Router;
+use Symfony\Component\DependencyInjection\ContainerAware;
 
 
-class ProfilController {
-    private $em;
-    private $templating;
-    private $router;
-    
-    
-    public function __construct(EntityManager $em, EngineInterface $templating, Router $router) {
-        $this->em = $em;
-        $this->templating = $templating;
-        $this->router = $router;
-    }
-    
+class ProfilController extends ContainerAware {
     
     /**
      * Renvoie la vue de la page de profil de l'utilisateur spécifié par son
@@ -31,21 +19,17 @@ class ProfilController {
      * @return \CarnetAdresses\AppBundle\Controller\Response
      * @throws NotFoundHttpException if there is no user to return
      */
-    public function viewAction($username) {
-        $repository = $this->em->getRepository('CarnetAdressesUserBundle:User');
+    public function profilAction($username) {
+        $em = $this->container->get('doctrine')->getManager();
+        $userRepo = $em->getRepository('CarnetAdressesUserBundle:User');
         
-        $user = $repository->findOneBy(array('username' => $username));
+        $user = $userRepo->findOneBy(array('username' => $username));
         if (!$user) {
-            throw new NotFoundHttpException("Le profil de $username n'existe pas.");
+            throw new NotFoundResourceException("Aucun User ne correspond à $username.");
         }
         
-        $content = $this->templating
-                ->renderResponse('CarnetAdressesAppBundle:Front:profil.html.twig',
-                        array(
-                            'username' => $username,
-                            'user'     => $user,
-                ));
-        return $content;
+        return $this->container->get('templating')
+                ->renderResponse('CarnetAdressesAppBundle:Front:profil.html.twig', array('user' => $user));
     }
     
     
@@ -56,28 +40,10 @@ class ProfilController {
      * @param string  $username
      * @throws NotFoundHttpException
      */
-    public function editAction(Request $request, $username) {
-        $repository = $this->em->getRepository('CarnetAdressesUserBundle:User');
-        
-        $user = $repository->findOneBy(array('username' => $username));
-        if (!$user) {
-            throw new NotFoundHttpException("Le profil de $username n'existe pas.");
-        }
-        
-        $editForm = $this->formFactory->create(new UserEditType(), $user);
-        if ($editForm->handleRequest($request)->isValid()) {
-            $this->em->persist($user);
-            $this->em->flush();
-            
-            $request->getSession()->getFlashBag()->add('notice', 'Votre profil a bien été modifié.');
-        }
-        
-        return new RedirectResponse($this->render->generate('carnet_app_profil',
-                array(
-                    'username' => $user->getUsername(),
-                    'user'     => $user,
-                    'editForm' => $editForm->createView(),
-        )));
+    public function editAction($username) {
+        $em = $this->container->get('doctrine')->getManager();
+        $userRepo = $em->getRepository('CarnetAdressesUserBundle:User');
+        $user = $userRepo->findBy(array('username' => $username));
     }
 
     
@@ -86,8 +52,8 @@ class ProfilController {
      * @return RedirectResponse
      */
     public function clickOnAddAction($username) {
-        return new RedirectResponse($this->router->generate('carnet_app_ajouter', 
-                array('username' => $username)
+        return new RedirectResponse($this->container->get('router')
+                ->generate('carnet_app_ajouter', array('username' => $username)
         ));
     }
     
@@ -98,8 +64,8 @@ class ProfilController {
      * @return RedirectResponse
      */
     public function clickOnListingAction($username) {
-        return new RedirectResponse($this->router->generate('carnet_app_listing', 
-                array('username' => $username)
+        return new RedirectResponse($this->container->get('router')
+                >generate('carnet_app_listing', array('username' => $username)
         ));
     }
 

@@ -4,36 +4,12 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        {% block stylesheets %}
-            <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.css" rel="stylesheet" />
-        {% endblock %}
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.css" rel="stylesheet" />
         <title>{% block title %}CarnetApp{% endblock %}</title>
     </head>
-    
+
     <body>
-        <!-- La barre de menu du site -->
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a href="{{ path('carnet_app_index') }}" class="navbar-brand">CarnetApp</a>
-                </div>
-                {% block menubar %}{% endblock %}
-            </div>
-        </nav>
-        
-        <div class="jumbotron">
-            <div class="container">
-                <header class="page-header">
-                    {% block header %}{% endblock %}
-                </header>
-            </div>
-        </div>
-        
-        <div class="container">
-            {% block body %}{% endblock %}
-        </div>
-        
-        {% block scripts %}{% endblock %}
-    </body>
+    {% block body %}{% endblock %}
+    {% block scripts %}{% endblock %}
+</body>
 </html>

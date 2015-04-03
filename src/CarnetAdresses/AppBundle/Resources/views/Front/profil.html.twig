@@ -18,7 +18,7 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-sm-4 well">
+        <div class="col-md-5 well">
             <h3><i>Vos informations personnelles</i></h3>
             <p class="">
                 <b>{{ user.firstname }} {{ user.surname }}</b> <br/>
@@ -30,9 +30,49 @@
                 {% endif %}
             </p>
         </div>
-        
-        <div class="col-md-6 col-sm-offset-2">
-            Coucou !
+
+        <div class="col-md-5 col-sm-offset-1 well">
+            <legend><i>Editer le profil</i></legend>
+            {{ form_start(editForm, {'method':'POST', 'action':path('carnet_app_profil',{'username':user.username}) }) }}
+                {{ form_errors(editForm) }}
+
+                <div class="form-group">
+                    {{ form_errors(editForm.email) }}
+                    {{ form_widget(editForm.email, 
+                        {'attr':{'class':'form-control input-md', 'placeholder':'Votre e-mail'} }) }}
+                </div>
+
+                <div class="form-group">
+                    <div class="form-inline">
+                        {{ form_errors(editForm.firstname) }}
+                        {{ form_widget(editForm.firstname, 
+                                {'attr':{'class':'form-control input-md', 'placeholder':'Votre prénom'} }) }}
+                        {{ form_errors(editForm.surname) }}
+                        {{ form_widget(editForm.surname, 
+                                {'attr':{'class':'form-control input-md', 'placeholder':'Votre nom de famille'} }) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    {{ form_errors(editForm.address) }}
+                    {{ form_widget(editForm.address, 
+                            {'attr':{'class':'form-control input-md', 'placeholder':'Votre adresse postale'} }) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_errors(editForm.phonenumber) }}
+                    {{ form_widget(editForm.phonenumber, 
+                            {'attr':{'class':'form-control input-md', 'placeholder':'Votre numéro de téléphone'} }) }}
+                </div>
+                
+                <div class="form-group">
+                    {{ form_errors(editForm.siteweb) }}
+                    {{ form_widget(editForm.siteweb, 
+                            {'attr':{'class':'form-control input-md', 'placeholder':'Adresse de votre site web'} }) }}
+                </div>
+                
+                <input type="submit" class="btn btn-primary" value="Mettre à jour" />
+            {{ form_end(editForm) }}
         </div>
     </div>
 {% endblock %}

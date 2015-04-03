@@ -2,11 +2,13 @@
 
 namespace CarnetAdresses\AppBundle\Controller;
 
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Translation\Exception\NotFoundResourceException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\Form\Form;
+
+use CarnetAdresses\UserBundle\Form\UserEditType;
+use CarnetAdresses\UserBundle\Entity\User;
 
 
 class ProfilController extends ContainerAware {
@@ -28,45 +30,39 @@ class ProfilController extends ContainerAware {
             throw new NotFoundResourceException("Aucun User ne correspond à $username.");
         }
         
+        $editForm = $this->container->get('form.factory')->create(new UserEditType(), $user);
+        $request = $this->container->get('request_stack')->getCurrentRequest();
+        
+        if ($request->getMethod() == 'POST')  { 
+            $editForm->handleRequest($request);
+            return $this->editProfilAction($editForm, $user);
+        }
+        
         return $this->container->get('templating')
-                ->renderResponse('CarnetAdressesAppBundle:Front:profil.html.twig', array('user' => $user));
+                ->renderResponse('CarnetAdressesAppBundle:Front:profil.html.twig', 
+                        array(
+                            'user' => $user,
+                            'editForm' => $editForm->createView(),
+                ));
     }
     
     
     /**
      * Action liée à l'édition du Profil de l'utilsateur spécifié par son username.
      * 
-     * @param Request $request
-     * @param string  $username
+     * @param Form $editForm
+     * @param User $user
      * @throws NotFoundHttpException
      */
-    public function editAction($username) {
-        $em = $this->container->get('doctrine')->getManager();
-        $userRepo = $em->getRepository('CarnetAdressesUserBundle:User');
-        $user = $userRepo->findBy(array('username' => $username));
-    }
-
-    
-    /**
-     * 
-     * @return RedirectResponse
-     */
-    public function clickOnAddAction($username) {
+    public function editProfilAction(Form $editForm, User $user) {
+        if ($editForm->isValid()) {
+            $em = $this->container->get('doctrine')->getManager();
+            $em->persist($user);
+            $em->flush();
+        }
+        
         return new RedirectResponse($this->container->get('router')
-                ->generate('carnet_app_ajouter', array('username' => $username)
+                        ->generate('carnet_app_profil', array('username' => $user->getUsername())
         ));
     }
-    
-    
-    /**
-     * 
-     * @param type $username
-     * @return RedirectResponse
-     */
-    public function clickOnListingAction($username) {
-        return new RedirectResponse($this->container->get('router')
-                >generate('carnet_app_listing', array('username' => $username)
-        ));
-    }
-
 }

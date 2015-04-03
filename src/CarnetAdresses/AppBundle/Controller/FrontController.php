@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class FrontController extends Controller {
 
     public function indexAction() {
-        return $this->forward('CarnetAdressesAppBundle:Index:view');
+        return $this->forward('CarnetAdressesAppBundle:Index:index');
     }
     
     
@@ -18,17 +18,12 @@ class FrontController extends Controller {
     
     
     public function ajouterAction($username) {
-        
+        return $this->forward('CarnetAdressesAppBundle:Ajouter:ajouter', array('username' => $username));
     }
     
     
     public function listingAction($username) {
-    
-    }
-    
-    
-    public function logoutAction($username) {
-        
+        return $this->forward('CarnetAdressesAppBundle:Listing:listing', array('username' => $username));
     }
 
 }

@@ -2,7 +2,7 @@
 
 namespace CarnetAdresses\AppBundle\Controller;
 
-use Symfony\Component\Translation\Exception\NotFoundResourceException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\Form\Form;
@@ -25,7 +25,7 @@ class ProfilController extends ContainerAware {
 
         $user = $userRepo->findOneBy(array('username' => $username));
         if (!$user) {
-            throw new NotFoundResourceException("Aucun User ne correspond à $username.");
+            throw new NotFoundHttpException("Aucun User ne correspond à $username.");
         }
 
         $editForm = $this->container->get('form.factory')->create(new UserEditType(), $user);

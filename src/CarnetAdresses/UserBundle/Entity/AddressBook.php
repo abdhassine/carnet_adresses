@@ -116,5 +116,10 @@ class AddressBook {
         }
         return null;
     }
+    
+    
+    public function isEmpty() {
+        return $this->contacts->isEmpty();
+    }
 
 }

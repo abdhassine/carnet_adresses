@@ -3,13 +3,14 @@
 namespace CarnetAdresses\AppBundle\Controller;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
-use Symfony\Component\Translation\Exception\NotFoundResourceException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use CarnetAdresses\UserBundle\Form\AddressBookType;
 use CarnetAdresses\UserBundle\Entity\AddressBook;
+
 
 class ListingController extends ContainerAware {
 
@@ -19,21 +20,21 @@ class ListingController extends ContainerAware {
 
         $user = $userRepo->findOneBy(array('username' => $username));
         if (!$user) {
-            throw new NotFoundResourceException("Aucun User ne correspond à $username.");
+            throw new NotFoundHttpException("Aucun User ne correspond à $username.");
         }
 
         $abRepo = $em->getRepository('CarnetAdressesUserBundle:AddressBook');
         $book = $abRepo->findAddressBookOf($user);
-        $contacts = ($book) ? $book->getContacts() : null;
 
-        if (!$contacts) {
-            echo 'coucou';
+        if (!$book || $book->isEmpty()) {
             return $this->container->get('templating')
                             ->renderResponse('CarnetAdressesAppBundle:Front:listing.html.twig', array(
                                 'username' => $username,
                                 'contactsForm' => null,
             ));
         }
+        
+        $contacts = $book->getContacts();
 
         return $this->contactFormAction($contacts, $book);
     }
@@ -70,19 +71,19 @@ class ListingController extends ContainerAware {
 
         if ($contactsForm->isValid()) {
             $data = $request->get($contactsForm->getName());
-            $ids = $data['contacts'];
 
-            foreach ($ids as $id) {
-                $contact = $userRepo->find($id);
-                $book->removeContact($contact);
+            if (isset($data['contacts'])) {
+                foreach ($data['contacts'] as $id) {
+//                    $contact = $userRepo->find($id);
+//                    $book->removeContact($contact);
+                }
+                $em->persist($book);
+                $em->flush();
             }
-            
-            $em->persist($book);
-            $em->flush();
 
             return new RedirectResponse($this->container->get('router')
                             ->generate('carnet_app_listing', array(
-                                'username' => $book->getOwner()->getUsername(),
+                                'username' => $book->getOwner()->getUsername()
             )));
         }
 

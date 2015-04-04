@@ -5,19 +5,29 @@ namespace CarnetAdresses\UserBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Doctrine\ORM\QueryBuilder;
 
 
-class LoginType extends AbstractType {
+class UserItemListType extends AbstractType {
+    private $queryBuilder;
+    
+    
+    public function __construct(QueryBuilder $queryBuilder) {
+        $this->queryBuilder = $queryBuilder;
+    }
+    
+    
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder
-            ->add('login', 'text')
-            ->add('password', 'password')
-            ->add('signin', 'submit')
-        ;
+        $builder->add('user', 'entity', array(
+            'class'         => 'CarnetAdressesUserBundle:User',
+            'query_builder' => $this->queryBuilder,
+            'expanded'      => true,
+            'multiple'      => true,
+        ));
     }
     
     
@@ -35,7 +45,6 @@ class LoginType extends AbstractType {
      * @return string
      */
     public function getName() {
-        return 'carnetadresses_userbundle_login';
+        return 'carnetadresses_userbundle_user_item_list';
     }
 }
-

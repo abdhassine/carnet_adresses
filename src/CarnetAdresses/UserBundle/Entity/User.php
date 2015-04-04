@@ -171,12 +171,9 @@ class User extends BaseUser {
      * @return string
      */
     public function __toString() {
-        $str = parent::__toString().'<br />';
-        $str .= $this->email.'<br />'
-            .$this->firstname.' '.$this->lastname.'<br />'
-            .((isset($this->address)) ? $this->address.'<br />' : '')
-            .((isset($this->phonenumber)) ? $this->phonenumber.'<br />' : '')
-            .((isset($this->siteweb)) ? $this->siteweb : '');
+        $str = parent::__toString().' ';
+        $str .= $this->email.' '
+             .$this->firstname.' '.$this->surname;
         return (string)$str;
     }
 }

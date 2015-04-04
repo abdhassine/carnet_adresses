@@ -54,7 +54,7 @@ class ProfilController extends ContainerAware {
      * @param User $user
      * @throws NotFoundHttpException
      */
-    public function editProfilAction(Form $editForm, User $user) {
+    private function editProfilAction(Form $editForm, User $user) {
         if ($editForm->isValid()) {
             $em = $this->container->get('doctrine')->getManager();
             $em->persist($user);

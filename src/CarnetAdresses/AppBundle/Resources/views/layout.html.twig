@@ -6,7 +6,7 @@
 
 {% block body %}
     {# Barre de menu du site, visible lorsque l'on est connecté #}
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <a href="{{ path('carnet_app_index') }}" class="navbar-brand">CarnetApp</a>
@@ -22,7 +22,7 @@
         <div class="container">
             <header>
                 {% block header %}
-                    <h2>CarnetApp : mon carnet d'adresses en ligne</h2>
+                    <h2><b>CarnetApp - mon carnet d'adresses en ligne</b></h2>
                 {% endblock %}
             </header>
         </div>

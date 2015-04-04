@@ -176,4 +176,5 @@ class User extends BaseUser {
              .$this->firstname.' '.$this->surname;
         return (string)$str;
     }
+    
 }

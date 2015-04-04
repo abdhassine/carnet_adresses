@@ -43,7 +43,7 @@
                     </thead>
 
                     <tbody>
-                    {% for child in contactsForm.user %}
+                    {% for child in contactsForm.contacts %}
                         {% set index = child.vars.value %}
                         <tr>
                             <td>{{ form_widget(child) }}</td>

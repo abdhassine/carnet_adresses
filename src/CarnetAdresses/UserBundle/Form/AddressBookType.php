@@ -8,7 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\ORM\QueryBuilder;
 
 
-class UserItemListType extends AbstractType {
+class AddressBookType extends AbstractType {
     private $queryBuilder;
     
     
@@ -22,7 +22,7 @@ class UserItemListType extends AbstractType {
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('user', 'entity', array(
+        $builder->add('contacts', 'entity', array(
             'class'         => 'CarnetAdressesUserBundle:User',
             'query_builder' => $this->queryBuilder,
             'expanded'      => true,
@@ -36,7 +36,7 @@ class UserItemListType extends AbstractType {
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
         $resolver->setDefaults(array(
-            'data_class' => 'CarnetAdresses\UserBundle\Entity\User'
+            'data_class' => 'CarnetAdresses\UserBundle\Entity\AddressBook'
         ));
     }
 
@@ -45,6 +45,6 @@ class UserItemListType extends AbstractType {
      * @return string
      */
     public function getName() {
-        return 'carnetadresses_userbundle_user_item_list';
+        return 'carnetadresses_userbundle_address_book';
     }
 }

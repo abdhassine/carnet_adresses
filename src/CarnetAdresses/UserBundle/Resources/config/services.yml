@@ -2,3 +2,14 @@ services:
 #    carnet_adresses_user.example:
 #        class: CarnetAdresses\UserBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+    carnet_adresses_user.registration.form.type:
+        class:     CarnetAdresses\UserBundle\Form\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: carnetadresses_userbundle_registration }
+            
+    carnet_adresses_user.profile.form.type:
+        class:     CarnetAdresses\UserBundle\Form\ProfileFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: carnetadresses_userbundle_profile }

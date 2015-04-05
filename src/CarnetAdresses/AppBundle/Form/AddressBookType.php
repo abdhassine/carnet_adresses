@@ -1,6 +1,6 @@
 <?php
 
-namespace CarnetAdresses\UserBundle\Form;
+namespace CarnetAdresses\AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -36,7 +36,7 @@ class AddressBookType extends AbstractType {
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
         $resolver->setDefaults(array(
-            'data_class' => 'CarnetAdresses\UserBundle\Entity\AddressBook'
+            'data_class' => 'CarnetAdresses\AppBundle\Entity\AddressBook'
         ));
     }
 
@@ -45,6 +45,6 @@ class AddressBookType extends AbstractType {
      * @return string
      */
     public function getName() {
-        return 'carnetadresses_userbundle_address_book';
+        return 'carnetadresses_appbundle_address_book';
     }
 }

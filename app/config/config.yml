@@ -77,3 +77,9 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: CarnetAdresses\UserBundle\Entity\User
+    registration:
+        form:
+            type: carnetadresses_userbundle_registration
+    profile:
+        form:
+            type: carnetadresses_userbundle_profile

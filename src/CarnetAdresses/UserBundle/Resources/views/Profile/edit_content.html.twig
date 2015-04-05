@@ -1,6 +1,61 @@
-<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" />
+<div class="row">
+    <div class="col-md-6 col-sm-offset-3 well">
+        <legend><i>Editer le profil</i></legend>
+        {{ form_start(form, {'method':'POST', 'action':path('fos_user_profile_edit') }) }}
+        {{ form_errors(form) }}
+        
+        <div class="form-group">
+            {{ form_errors(form.username) }}
+            {{ form_widget(form.username, 
+                        {'attr':{'class':'form-control input-md', 'placeholder':'Votre pseudo'} }) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_errors(form.email) }}
+            {{ form_widget(form.email, 
+                        {'attr':{'class':'form-control input-md', 'placeholder':'Votre e-mail'} }) }}
+        </div>
+
+        <div class="form-group">
+            <div class="form-inline">
+                {{ form_errors(form.firstname) }}
+                {{ form_widget(form.firstname, 
+                                {'attr':{'class':'form-control input-md', 'placeholder':'Votre prénom'} }) }}
+                {{ form_errors(form.surname) }}
+                {{ form_widget(form.surname, 
+                                {'attr':{'class':'form-control input-md', 'placeholder':'Votre nom de famille'} }) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form_errors(form.address) }}
+            {{ form_widget(form.address, 
+                            {'attr':{'class':'form-control input-md', 'placeholder':'Votre adresse postale'} }) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_errors(form.phonenumber) }}
+            {{ form_widget(form.phonenumber, 
+                            {'attr':{'class':'form-control input-md', 'placeholder':'Votre numéro de téléphone'} }) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_errors(form.siteweb) }}
+            {{ form_widget(form.siteweb, 
+                            {'attr':{'class':'form-control input-md', 'placeholder':'Adresse de votre site web'} }) }}
+        </div>
+        
+        <hr>
+
+        <div class="form-group">
+            {{ form_errors(form.current_password) }}
+            {{ form_widget(form.current_password, 
+                        {'attr':{'class':'form-control input-md', 'placeholder':"Entrez votre mot de passe pour confirmer l'édition"} }) }}
+        </div>
+        
+        <p class="text-center">
+            <input type="submit" class="btn btn-primary" value="Mettre à jour" />
+        </p>
+        {{ form_end(form) }}
     </div>
-</form>
+</div>

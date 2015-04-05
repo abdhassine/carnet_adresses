@@ -5,19 +5,6 @@
 
 
 {% block body %}
-    {# Barre de menu du site, visible lorsque l'on est connecté #}
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <a href="#" class="navbar-brand">CarnetApp</a>
-            </div>
-            {% block menubar %}
-                {# le contenu de la barre changera en fonction de la page #}
-            {% endblock %}
-        </div>
-    </nav>
-
-    {# Corps de la page #}
     <div class="jumbotron">
         <div class="container">
             <header>
@@ -27,16 +14,10 @@
             </header>
         </div>
     </div>
-
+    
     <div class="container">
         {% block content %}{% endblock %}
     </div>
-    <hr/>
-    <footer class="container">
-        <p class="text-right">
-            © Brondon UNG 2014-2015
-        </p>
-    </footer>
 {% endblock %}
 
 

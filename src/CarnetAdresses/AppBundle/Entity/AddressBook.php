@@ -1,16 +1,18 @@
 <?php
 
-namespace CarnetAdresses\UserBundle\Entity;
+namespace CarnetAdresses\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+
+use CarnetAdresses\UserBundle\Entity\User;
 
 
 /**
  * AsdressBook
  *
  * @ORM\Table(name="addressbook_table")
- * @ORM\Entity(repositoryClass="CarnetAdresses\UserBundle\Entity\AddressBookRepository")
+ * @ORM\Entity(repositoryClass="CarnetAdresses\AppBundle\Entity\AddressBookRepository")
  */
 class AddressBook {
     /**
@@ -21,13 +23,13 @@ class AddressBook {
     private $id;
     
     /**
-     * @ORM\OneToOne(targetEntity="User")
+     * @ORM\OneToOne(targetEntity="CarnetAdresses\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="id_owner", referencedColumnName="id_user", nullable=false)
      */
     private $owner;
     
     /**
-     * @ORM\ManyToMany(targetEntity="User")
+     * @ORM\ManyToMany(targetEntity="CarnetAdresses\UserBundle\Entity\User")
      * @ORM\JoinTable(name="address_contacts_table",
      *          joinColumns={@ORM\JoinColumn(name="id_addressbook", referencedColumnName="id_addressbook")},
      *          inverseJoinColumns={@ORM\JoinColumn(name="id_contact", referencedColumnName="id_user")}
@@ -120,6 +122,11 @@ class AddressBook {
     
     public function isEmpty() {
         return $this->contacts->isEmpty();
+    }
+    
+    
+    public function contains(User $user) {
+        return $this->contacts->contains($user);
     }
 
 }

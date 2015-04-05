@@ -2,35 +2,36 @@
 
 
 {% block title %}
-    {{ parent() }} - Contacts de {{ username }}
+    {{ parent() }} - Contacts de {{ app.user.username }}
 {% endblock %}
 
 
 {% block menubar %}
     <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-            <li><a href="{{ path('carnet_app_profil', {'username':username}) }}">Mon profil</a></li>
-            <li class="active"><a href="{{ path('carnet_app_listing', {'username':username}) }}">Mes contacts</a></li>
-            <li><a href="{{ path('carnet_app_ajouter', {'username':username}) }}">Ajouter un contact</a></li>
+            <li><a href="{{ path('fos_user_profile_show') }}">Mon profil</a></li>
+            <li class="active"><a href="{{ path('carnet_app_contacts') }}">Mes contacts</a></li>
+            <li><a href="{{ path('carnet_app_search') }}">Faire une recherche</a></li>
         </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Déconnexion</a></li>
-        </ul>
+       {{ parent() }}
     </div>
 {% endblock %}
 
 
 {% block header %}
     {{ parent() }}
-    <h3> Contacts du membre <b>{{ username }}</b></h3>
+    <h3> Contacts du membre <b>{{ app.user.username }}</b></h3>
+    <p class="text-center text-info">
+        Vous pouvez choisir de décocher des contacts de votre liste pour les supprimer de votre carnet.
+    </p>
 {% endblock %}
 
 
 {% block content %}
     <div class="row">
         <div class="col-lg-8 col-md-offset-2">
-            {% if contactsForm %}
-            {{ form_start(contactsForm, { 'action':path('carnet_app_listing', {'username':username}) } ) }}
+            {% if contactsForm is defined %}
+            {{ form_start(contactsForm, { 'action':path('carnet_app_contacts', {'username':username}) } ) }}
                 <table class="table table-hover">
                     <caption class="lead"><i>Vos contacts</i></caption>
                     <thead>
@@ -48,7 +49,7 @@
                         <tr>
                             <td>{{ form_widget(child) }}</td>
                             <td>
-                                <a href="{{ path('carnet_app_profil', {'username':choices[index].username}) }}">
+                                <a href="{{ path('carnet_app_profile', {'username':choices[index].username}) }}">
                                     {{ choices[index].username }}
                                 </a>
                             </td>
@@ -59,7 +60,7 @@
                     </tbody>
                 </table>
                 <p class="text-right">
-                    <input type="submit" method="post" class="btn btn-danger btn-md" value="Supprimer la sélection">
+                    <input type="submit" method="post" class="btn btn-danger btn-md" value="Mettre à jour les contacts">
                 </p>
             {{ form_end(contactsForm) }}
             {% else %}

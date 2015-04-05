@@ -1,5 +1,19 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
+
+{% block menubar %}
+    {{ parent() }}
+{% endblock %}
+
+
+{% block header %}
+    {{ parent() }}
+    <p class="text-info text-center">
+        Sur cette application, tu peux créer ton carnet d'adresses en ligne et donc l'avoir toujours en main ! 
+    </p>
+{% endblock %}
+
+
 {% block fos_user_content %}
-{% include "FOSUserBundle:Registration:register_content.html.twig" %}
+    {% include "FOSUserBundle:Registration:register_content.html.twig" %}
 {% endblock fos_user_content %}

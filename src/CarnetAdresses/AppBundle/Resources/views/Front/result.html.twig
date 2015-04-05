@@ -1,0 +1,55 @@
+{% extends "CarnetAdressesAppBundle::layout.html.twig" %}
+
+
+{% block title %}
+    {{ parent() }} - Résultat de la recherche
+{% endblock %}
+
+
+{% block menubar %}
+    <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li><a href="{{ path('fos_user_profile_show') }}">Mon profil</a></li>
+            <li><a href="{{ path('carnet_app_contacts') }}">Mes contacts</a></li>
+            <li class="active"><a href="{{ path('carnet_app_search') }}">Faire une recherche</a></li>
+        </ul>
+        {{ parent() }}
+    </div>
+{% endblock %}
+
+
+{% block header %}
+    {{ parent() }}
+    <h3>Résultat de la recherche</h3>
+{% endblock %}
+
+
+{% block content %}
+    {% if users is null %}
+        <div class="container">
+            <p class="lead bg-warning text-warning text-center">
+                Veuillez saisir une requête de recherche.
+            </p>
+        </div>
+    {% elseif users is empty %}
+        <div class="container">
+            <p class="lead text-center">
+                Votre requête a renvoyé un résultat vide.
+            </p>
+        </div>
+    {% endif %}
+    {% for user in users %}
+        <div class="row">
+            <div class="col-xs-4">
+                <a href="{{ path('carnet_app_profile', {'username':user.username}) }}">{{ user.username }}</a>
+            </div>
+            <div class="col-xs-4">
+                {{ user.email }}
+            </div>
+            <div class="col-xs-4">
+                {{ user.firstname }} {{ user.surname }}
+            </div>
+        </div>
+        <br>
+    {% endfor %}
+{% endblock %}

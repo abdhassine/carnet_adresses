@@ -1,5 +1,29 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
+
+{% block title %}
+    {{ parent() }} - Profil de {{ app.user.username }}
+{% endblock %}
+
+
+{% block menubar %}
+    <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="{{ path('fos_user_profile_edit') }}">Editer mon profil</a></li>
+            <li><a href="{{ path('carnet_app_contacts') }}">Mes contacts</a></li>
+            <li><a href="{{ path('carnet_app_search') }}">Faire une recherche</a></li>
+        </ul>
+        {{ parent() }}
+    </div>
+{% endblock %}
+
+
+{% block header %}
+    {{ parent() }}
+    <h3> Profil du membre <b>{{ app.user.username }}</b></h3>
+{% endblock %}
+
+
 {% block fos_user_content %}
-{% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+    {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
 {% endblock fos_user_content %}

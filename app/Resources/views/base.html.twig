@@ -10,7 +10,37 @@
     </head>
 
     <body>
-    {% block body %}{% endblock %}
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <a href="{{ path('fos_user_profile_show') }}" class="navbar-brand">Accueil</a>
+                    {% else %}
+                        <a href="" class="navbar-brand">Accueil</a>
+                    {% endif %}
+                </div>
+                {% block menubar %}
+                    {# Ajouter les liens vers les autres pages en fonction de la page où l'on se trouve #}
+
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+                        {% endif %}
+                    </ul>
+                {% endblock %}
+            </div>
+        </nav>
+
+        {% block body %}{% endblock %}
+
+        <hr>
+
+        <footer class="container">
+            <p class="text-right">
+                © Brondon UNG 2014-2015
+            </p>
+        </footer>
+
     {% block scripts %}{% endblock %}
-</body>
+    </body>
 </html>

@@ -1,8 +1,11 @@
 <?php
 
-namespace CarnetAdresses\UserBundle\Entity;
+namespace CarnetAdresses\AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+
+use CarnetAdresses\UserBundle\Entity\User;
+
 
 /**
  * AddressBookRepository

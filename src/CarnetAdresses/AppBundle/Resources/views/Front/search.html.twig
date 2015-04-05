@@ -1,0 +1,76 @@
+{% extends "CarnetAdressesAppBundle::layout.html.twig" %}
+
+
+{% block title %}
+    {{ parent() }} - Recherche
+{% endblock %}
+
+
+{% block menubar %}
+    <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li><a href="{{ path('fos_user_profile_show') }}">Mon profil</a></li>
+            <li><a href="{{ path('carnet_app_contacts') }}">Mes contacts</a></li>
+            <li class="active"><a href="{{ path('carnet_app_search') }}">Faire une recherche</a></li>
+        </ul>
+        {{ parent() }}
+    </div>
+{% endblock %}
+
+
+{% block header %}
+    {{ parent() }}
+    <h3> Faire une recherche de contact</h3>
+{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="well">
+                {{ form_start(form, {'method':'post', 'action':path('carnet_app_search') }) }}
+                    <legend>Rechercher un contact</legend>
+                    <div class="form-group">
+                        {{ form_errors(form.username) }}
+                        {{ form_label(form.username) }}
+                        {{ form_widget(form.username, {'attr':{'class':'form-control input-md'} }) }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form_errors(form.email) }}
+                        {{ form_label(form.email) }}
+                        {{ form_widget(form.email, {'attr':{'class':'form-control input-md'} }) }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form_errors(form.firstname) }}
+                        {{ form_label(form.firstname) }}
+                        {{ form_widget(form.firstname, {'attr':{'class':'form-control input-md'} }) }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form_errors(form.surname) }}
+                        {{ form_label(form.surname) }}
+                        {{ form_widget(form.surname, {'attr':{'class':'form-control input-md'} }) }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form_errors(form.address) }}
+                        {{ form_label(form.address) }}
+                        {{ form_widget(form.address, {'attr':{'class':'form-control input-md'} }) }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form_errors(form.phonenumber) }}
+                        {{ form_label(form.phonenumber) }}
+                        {{ form_widget(form.phonenumber, {'attr':{'class':'form-control input-md'} }) }}
+                    </div>
+                    
+                    <p class="text-center">
+                        <input type="submit" class="btn btn-primary" value="Rechercher" />
+                    </p>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

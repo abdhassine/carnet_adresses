@@ -3,14 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/html/carnet_adresses/src/CarnetAdresses/AppBundle/Controller/FrontController.php</file>
-            <file>file:/var/www/html/carnet_adresses/src/CarnetAdresses/AppBundle/Resources/views/layout.html.twig</file>
             <file>file:/var/www/html/carnet_adresses/README.md</file>
-            <file>file:/var/www/html/carnet_adresses/src/CarnetAdresses/AppBundle/Controller/ListingController.php</file>
-            <file>file:/var/www/html/carnet_adresses/app/config/security.yml</file>
-            <file>file:/var/www/html/carnet_adresses/src/CarnetAdresses/AppBundle/Resources/views/Front/profil.html.twig</file>
-            <file>file:/var/www/html/carnet_adresses/src/CarnetAdresses/UserBundle/Form/UserType.php</file>
-            <file>file:/var/www/html/carnet_adresses/src/CarnetAdresses/UserBundle/Form/UserEditType.php</file>
         </group>
     </open-files>
 </project-private>

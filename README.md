@@ -22,7 +22,7 @@ L'ajout d'un contact est direct, il n'y a pas de système de requête auprès du
 
 
 ## Description des pages
----
+====
 
 ### La page d'accueil
 On peut sur cette page entrer son login et mot de passe pour se connecter à l'application. <br>

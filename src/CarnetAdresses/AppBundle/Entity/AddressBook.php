@@ -23,13 +23,13 @@ class AddressBook {
     private $id;
     
     /**
-     * @ORM\OneToOne(targetEntity="CarnetAdresses\UserBundle\Entity\User")
+     * @ORM\OneToOne(targetEntity="CarnetAdresses\UserBundle\Entity\User", cascade={"remove"})
      * @ORM\JoinColumn(name="id_owner", referencedColumnName="id_user", nullable=false)
      */
     private $owner;
     
     /**
-     * @ORM\ManyToMany(targetEntity="CarnetAdresses\UserBundle\Entity\User")
+     * @ORM\ManyToMany(targetEntity="CarnetAdresses\UserBundle\Entity\User", cascade={"remove"})
      * @ORM\JoinTable(name="address_contacts_table",
      *          joinColumns={@ORM\JoinColumn(name="id_addressbook", referencedColumnName="id_addressbook")},
      *          inverseJoinColumns={@ORM\JoinColumn(name="id_contact", referencedColumnName="id_user")}

@@ -46,7 +46,7 @@ class FrontController extends Controller {
         
         $request = $this->get('request_stack')->getCurrentRequest();
         
-        if ($request->getMethod() == 'POST') {
+        if ($request->isMethod('post')) {
             return $this->forward('CarnetAdressesAppBundle:Profile:add', array('request' => $request, 'user' => $user));
         }
 
@@ -62,7 +62,7 @@ class FrontController extends Controller {
     public function searchAction() {
         $request = $this->get('request_stack')->getCurrentRequest();
         
-        if ($request->getMethod() == 'POST') {
+        if ($request->isMethod('post')) {
             return $this->forward('CarnetAdressesAppBundle:Search:search', array('request' => $request));
         }
         
@@ -78,7 +78,7 @@ class FrontController extends Controller {
     public function contactsAction() {
         $request = $this->get('request_stack')->getCurrentRequest();
         
-        if ($request->getMethod() == 'POST') {
+        if ($request->isMethod('post')) {
             return $this->forward('CarnetAdressesAppBundle:Contacts:delete', array('request' => $request));
         }
         

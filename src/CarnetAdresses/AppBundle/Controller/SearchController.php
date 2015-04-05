@@ -7,8 +7,16 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 use CarnetAdresses\AppBundle\Form\SearchFormType;
 
 
+/**
+ * Controller de la page de recherche de membre.
+ */
 class SearchController extends ContainerAware {
-
+    
+    /**
+     * Renvoie la vue de la page de recherche de membre.
+     * 
+     * @return Response
+     */
     public function showAction() {
         $form = $this->container->get('form.factory')->create(new SearchFormType);
 
@@ -19,6 +27,13 @@ class SearchController extends ContainerAware {
     }
 
     
+    /**
+     * Action liée à la recherche de membres du site par les données entrées par
+     * l'utilisateur.
+     * 
+     * @param Request $request the request sent by the user
+     * @return Response
+     */
     public function searchAction(Request $request) {
         $form = $this->container->get('form.factory')->create(new SearchFormType);
         $form->handleRequest($request);

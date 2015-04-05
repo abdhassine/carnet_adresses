@@ -31,7 +31,7 @@
     <div class="row">
         <div class="col-lg-8 col-md-offset-2">
             {% if contactsForm is not null %}
-            {{ form_start(contactsForm, { 'action':path('carnet_app_contacts', {'username':username}) } ) }}
+            {{ form_start(contactsForm, { 'method':'post', 'action':path('carnet_app_contacts', {'username':username}) } ) }}
                 <table class="table table-hover">
                     <caption class="lead"><i>Vos contacts</i></caption>
                     <thead>
@@ -59,9 +59,9 @@
                     {% endfor %}
                     </tbody>
                 </table>
-                <p class="text-right">
-                    <input type="submit" method="post" class="btn btn-danger btn-md" value="Mettre à jour les contacts">
-                </p>
+                <div class="text-right">
+                    <input type="submit" class="btn btn-danger btn-md" value="Mettre à jour les contacts">
+                </div>
             {{ form_end(contactsForm) }}
             {% else %}
                 <p class="lead">

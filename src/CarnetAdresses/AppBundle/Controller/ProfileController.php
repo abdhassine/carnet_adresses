@@ -11,15 +11,16 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use CarnetAdresses\UserBundle\Entity\User;
 
 
+/**
+ * Controller de la page de profil des utilisateur autre que l'utlisateur connecté.
+ */
 class ProfileController extends ContainerAware {
 
     /**
-     * Renvoie la vue de la page de profil de l'utilisateur spécifié par son
-     * username en paramètre.
+     * Renvoie la vue de la page de profil de l'utilisateur spécifié.
      * 
      * @param User $user the user of the profile to show
      * @return \CarnetAdresses\AppBundle\Controller\Response
-     * @throws NotFoundHttpException if there is no user to return
      */
     public function showAction(User $user) {
         $userSession = $this->container->get('security.context')->getToken()->getUser();
@@ -41,13 +42,15 @@ class ProfileController extends ContainerAware {
     }
     
     
+    /**
+     * Action liée à l'ajout du membre dans le carnet d'adresses de l'utlisateur connecté.
+     * 
+     * @param Request $request the request sent by the user
+     * @param User $user the user that will be added to the address book
+     * @return RedirectResponse
+     */
     public function addAction(Request $request, User $user) {
         $userSession = $this->container->get('security.context')->getToken()->getUser();
-        
-        if (!is_object($user) || !$user instanceof UserInterface) {
-            throw new AccessDeniedException('Cet utilisateur n\'a pas accès à cette section.');
-        }
-        
         $em = $this->container->get('doctrine')->getManager();
         $book = $em->getRepository('CarnetAdressesAppBundle:AddressBook')->findAddressBookOf($userSession);
         $book->addContact($user);

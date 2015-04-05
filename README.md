@@ -1,6 +1,7 @@
 # Application de carnet
 ===============
 
+
 ## Intitulé du sujet
 ---
 L'objectif de cet exercice est de nous décrire et détailler la 
@@ -10,6 +11,14 @@ sur Symfony2, voici un descriptif des fonctionnalités auxquelles devra répondr
 - Identification (Inscription/Connexion/Déconnexion) de l'utilisateur par login/mot de passe (voir FOSUserBundle).
 - Afficher/Modifier ses informations (email / adresse / téléphone / site web).
 - Ajouter/Afficher/Lister/Supprimer les membres de son carnet d'adresses (membres qui devront être préalablement inscrit sur le site)
+
+
+## Explication de l'application
+Un utilisateur se connecte sur le site. Il arrive sur la page de ses informations. Il peut consulter la liste de ses contacts, faire une recherche de membre et éditer ses informations.
+Il peut voir la page d'information de ses contacts par le biais de sa liste de contacts, mais ne peut pas accéder à celle des autres. Néanmoins, en faisant une recherche, il peut accéder aux
+pages des membres qu'il a cherché. <br>
+L'ajout d'un contact est direct, il n'y a pas de système de requête auprès du membre ajouté.
+
 
 ## Description des pages
 ---
@@ -24,7 +33,6 @@ On peut également créer un compte. <br>
 On peut sur cette page s'inscrire sur le site en créant un compte. <br>
 **Vue -> register.html.twig** se trouvant dans le Bundle CarnetAdressesUserBundle
 
-
 ### La page de profil
 Sur la page de profil, on peut consulter les informations sur son compte, une liste de contacts. <br>
 De cette page, on peut :
@@ -35,11 +43,9 @@ De cette page, on peut :
 **Vue -> show.html.twig** se trouvant dans le Bundle CarnetAdressesUserBundle pour l'utilisateur connecté <br>
 **Vue -> profile.html.twig** se trouvant dans le Bundle CarnetAdressesAppBundle pour tout autre membre
 
-
 ### La page d'édition de profil
 Sur cette page, on peut modifier ses informations personnelles. <br>
 **Vue -> edit.html.twig** se trouvant dans le Bundle CarnetAdressesUserBundle pour l'utilisateur connecté
-
 
 ### La page des contacts
 Sur cette page, on peut lister les contacts de son carnet d'adresses.
@@ -47,7 +53,11 @@ La liste est affichée sous forme d'une liste de checkbox.
 Chaque checkbox qui n'est pas sélectionné pourra être supprimé par l'utilisateur. <br>
 **Vue -> contacts.html.twig**
 
-
 ### La page d'ajout de contact
 Sur cette page, on peut ajouter un contact en entrant son email dans le formulaire de recherche. <br>
 **Vue -> ajouter.html.twig**
+
+
+## Amélioration possible
+--
+* Ajouter un système d'envoi d'e-mail avec SwiftMailer

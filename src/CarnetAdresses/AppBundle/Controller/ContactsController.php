@@ -8,8 +8,16 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use CarnetAdresses\AppBundle\Form\AddressBookType;
 
 
+/**
+ * Controller de la page des contacts de l'utilisateur connecté.
+ */
 class ContactsController extends ContainerAware {
 
+    /**
+     * Renvoie la vue de la page des contacts de l'utilisateur connecté.
+     * 
+     * @return Response
+     */
     public function showAction() {
         $user = $this->container->get('security.context')->getToken()->getUser();
         $em = $this->container->get('doctrine')->getManager();
@@ -44,6 +52,12 @@ class ContactsController extends ContainerAware {
     }
 
     
+    /**
+     * Action liée à la suppression de contacts de l'utilisateur connecté.
+     * 
+     * @param Request $request the request sent by the user
+     * @return RedirectResponse
+     */
     public function deleteAction(Request $request) {
         $user = $this->container->get('security.context')->getToken()->getUser();
         $em = $this->container->get('doctrine')->getManager();

@@ -15,7 +15,7 @@ sur Symfony2, voici un descriptif des fonctionnalités auxquelles devra répondr
 ---
 
 ### La page d'accueil
-On peut sur cette page entrer son login et mot de passe pour se connecter à l'application.
+On peut sur cette page entrer son login et mot de passe pour se connecter à l'application. <br>
 On peut également créer un compte. <br>
 **Vue -> login.html.twig** se trouvant dans le Bundle CarnetAdressesUserBundle
 
@@ -26,18 +26,18 @@ On peut sur cette page s'inscrire sur le site en créant un compte. <br>
 
 
 ### La page de profil
-Sur la page de profil, on peut consulter les informations sur son compte, une liste de contacts.
+Sur la page de profil, on peut consulter les informations sur son compte, une liste de contacts. <br>
 De cette page, on peut :
     - aller modifier ses informations personnelles
     - voir la liste de ses contacts
     - faire une recherche de membres
     - si la page de profil n'est pas celle de l'utilisateur connecté, alors il peut ajouter le membre propriétaire du profil à ses contacts <br>
-**Vue -> show.html.twig** se trouvant dans le Bundle CarnetAdressesUserBundle pour l'utilisateur connecté
+**Vue -> show.html.twig** se trouvant dans le Bundle CarnetAdressesUserBundle pour l'utilisateur connecté <br>
 **Vue -> profile.html.twig** se trouvant dans le Bundle CarnetAdressesAppBundle pour tout autre membre
 
 
 ### La page d'édition de profil
-Sur cette page, on peut modifier ses informations personnelles.
+Sur cette page, on peut modifier ses informations personnelles. <br>
 **Vue -> edit.html.twig** se trouvant dans le Bundle CarnetAdressesUserBundle pour l'utilisateur connecté
 
 

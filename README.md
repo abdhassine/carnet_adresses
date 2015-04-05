@@ -15,6 +15,7 @@ sur Symfony2, voici un descriptif des fonctionnalités auxquelles devra répondr
 
 
 ## Explication de l'application
+---
 Un utilisateur se connecte sur le site. Il arrive sur la page de ses informations. Il peut consulter la liste de ses contacts, faire une recherche de membre et éditer ses informations.
 Il peut voir la page d'information de ses contacts par le biais de sa liste de contacts, mais ne peut pas accéder à celle des autres. Néanmoins, en faisant une recherche, il peut accéder aux
 pages des membres qu'il a cherché. <br>
@@ -22,7 +23,7 @@ L'ajout d'un contact est direct, il n'y a pas de système de requête auprès du
 
 
 ## Description des pages
-====
+---
 
 ### La page d'accueil
 On peut sur cette page entrer son login et mot de passe pour se connecter à l'application. <br>

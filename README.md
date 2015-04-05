@@ -56,7 +56,7 @@ Sur cette page, on peut modifier ses informations personnelles. <br>
 
 ### La page de modification de mot de passe
 Depuis la page d'édition de profil, on peut accéder à cette page pour modifier son mot de passe. <br>
-**Vue -> changePassword.html.twig** se trouvant dans le bundle CarnetAdressesUserBundle
+**Vue -> changePassword.html.twig** se trouvant dans le bundle CarnetAdressesUserBundle <br>
 **Route -> /profile/change-password/**
 
 ### La page des contacts
@@ -69,7 +69,7 @@ Chaque checkbox qui n'est pas sélectionné pourra être supprimé par l'utilisa
 ### La page de recherche d'un contact
 Sur cette page, on peut rechercher un/des contact(s) en fonction des données entrées dans le formulaire de recherche. <br>
 Le résultat de la recherche est envoyé sur une autre page qui liste les membres trouvés. De cette liste, on peut accéder au 
-profil de chaque membre.
+profil de chaque membre. <br>
 **Vue -> search.html.twig** <br>
 **Route -> /search/**
 

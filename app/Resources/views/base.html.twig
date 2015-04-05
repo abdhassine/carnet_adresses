@@ -16,7 +16,7 @@
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         <a href="{{ path('fos_user_profile_show') }}" class="navbar-brand">Accueil</a>
                     {% else %}
-                        <a href="" class="navbar-brand">Accueil</a>
+                        <a href="{{ path('fos_user_security_login') }}" class="navbar-brand">Accueil</a>
                     {% endif %}
                 </div>
                 {% block menubar %}

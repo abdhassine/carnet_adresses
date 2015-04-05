@@ -2,7 +2,6 @@
 
 namespace CarnetAdresses\AppBundle\Controller;
 
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use CarnetAdresses\AppBundle\Form\SearchFormType;

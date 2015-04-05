@@ -28,6 +28,10 @@ class FrontController extends Controller {
             throw new NotFoundHttpException("Aucun User ne correspond à $username.");
         }
         
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('Cet utilisateur n\'a pas accès à cette section.');
+        }
+        
         $request = $this->get('request_stack')->getCurrentRequest();
         
         if ($request->getMethod() == 'POST') {

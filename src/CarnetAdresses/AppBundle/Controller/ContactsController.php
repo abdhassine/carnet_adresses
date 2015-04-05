@@ -12,7 +12,6 @@ class ContactsController extends ContainerAware {
 
     public function showAction() {
         $user = $this->container->get('security.context')->getToken()->getUser();
-
         $em = $this->container->get('doctrine')->getManager();
         $book = $em->getRepository('CarnetAdressesAppBundle:AddressBook')->findAddressBookOf($user);
 
@@ -47,7 +46,6 @@ class ContactsController extends ContainerAware {
     
     public function deleteAction(Request $request) {
         $user = $this->container->get('security.context')->getToken()->getUser();
-
         $em = $this->container->get('doctrine')->getManager();
         $book = $em->getRepository('CarnetAdressesAppBundle:AddressBook')->findAddressBookOf($user);
 

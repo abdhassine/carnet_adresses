@@ -6,6 +6,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 use CarnetAdresses\UserBundle\Entity\User;
 
@@ -42,6 +43,10 @@ class ProfileController extends ContainerAware {
     
     public function addAction(Request $request, User $user) {
         $userSession = $this->container->get('security.context')->getToken()->getUser();
+        
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('Cet utilisateur n\'a pas accès à cette section.');
+        }
         
         $em = $this->container->get('doctrine')->getManager();
         $book = $em->getRepository('CarnetAdressesAppBundle:AddressBook')->findAddressBookOf($userSession);

@@ -21,26 +21,19 @@
                 {% if error %}
                     <p class="text-danger bg-danger">{{ error|trans({}, 'FOSUserBundle') }}</p>
                 {% endif %}
-                <form action="{{ path("fos_user_security_check") }}" method="post">
+                <form action="{{ path("fos_user_security_check") }}" method="post" class="form-signin">
+                    <h2 class="form-signin-heading">Se connecter</h2>
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" required autofocus placeholder="{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}" class="form-control input-lg" />
+                    <input type="password" id="password" name="_password" required placeholder="{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}" class="form-control input-lg" />
 
-                    <div class="form-group">
-                        <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" placeholder="{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}" class="form-control input-lg" />
-                    </div>
-
-                    <div class="form-group">
-                        <input type="password" id="password" name="_password" required="required" placeholder="{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}" class="form-control input-lg" />
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-4">
+                    <div class="checkbox">
+                        <label for="remember_me">
                             <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-                            <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
-                        </div>
-                        <div class="col-md-4 col-md-offset-4">
-                            <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" class="btn btn-success btn-lg" />
-                        </div>
+                        {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
+                        </label>
                     </div>
+                    <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" class="btn btn-success btn-block btn-lg" />
                 </form>
             </div><!-- end block well-->
         </div><!-- end block col -->
@@ -51,7 +44,7 @@
             <div class="well">
                 <p class="text-center lead">
                     Pas encore inscrit ? <br>
-                    <a href="{{ path('fos_user_registration_register') }}" class="btn btn-primary btn-lg" role="button">Inscription</a>
+                    <a href="{{ path('fos_user_registration_register') }}" class="btn btn-primary btn-block btn-lg" role="button">Inscription</a>
                 </p>
             </div>
         </div>

@@ -31,16 +31,28 @@
             </div>
         </nav>
 
-        {% block body %}{% endblock %}
+        {% block body %}
+            <div class="jumbotron">
+                <div class="container">
+                    <header class="page-header">
+                        {% block header %}
+                            <h2><b>CarnetApp - mon carnet d'adresses en ligne</b></h2>
+                        {% endblock %}
+                    </header>
+                </div>
+            </div>
+        {% endblock %}
 
         <hr>
 
-        <footer class="container">
-            <p class="text-right">
-                © Brondon UNG 2014-2015
-            </p>
+        <footer class="footer">
+            <div class="container">
+                <p class="text-muted text-right">
+                    © Brondon UNG 2014-2015
+                </p>
+            </div>
         </footer>
 
     {% block scripts %}{% endblock %}
-    </body>
+</body>
 </html>

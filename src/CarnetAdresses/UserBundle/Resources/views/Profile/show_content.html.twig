@@ -1,14 +1,20 @@
 <div class="row">
-    <div class="col-md-6 col-md-offset-3 well">
-        <h3><i>Vos informations personnelles</i></h3>
-        <p class="lead">
-            <b>{{ user.firstname }} {{ user.surname }}</b> <br>
-            {{ user.email }} <br>
-            {{ user.address }} <br>
-            {{ user.phonenumber }} <br>
-            {% if user.siteweb %}
-                <a href="{{ user.siteweb }}" target="_blank">{{ user.siteweb }}</a>
-            {% endif %}
-        </p>
-    </div>
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i>Vos informations personnelles</i></h3>
+            </div>
+            <div class="panel-body">
+                <p class="lead text-center">
+                    <b>{{ user.firstname }} {{ user.surname }}</b> <br>
+                    {{ user.email }} <br>
+                    {{ user.address }} <br>
+                    {{ user.phonenumber }}
+                    {% if user.siteweb %}
+                        <br><a href="{{ user.siteweb }}" target="_blank">{{ user.siteweb }}</a>
+                    {% endif %}
+                </p>
+            </div> <!-- panel-body -->
+        </div> <!-- panel -->
+    </div> <!-- col-md-6 -->
 </div>

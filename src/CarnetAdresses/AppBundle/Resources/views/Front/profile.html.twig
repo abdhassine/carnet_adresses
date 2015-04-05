@@ -22,13 +22,9 @@
     {{ parent() }}
     <h3> Profil du membre <b>{{ user.username }}</b></h3>
     {% if user.id != app.user.id and not isContact %}
-        <div class="row">
-            <div class="col-md-3 col-md-offset-4">
-                <form method="post" action="{{ path('carnet_app_profile', {'username':user.username}) }}" class="form-inline">
-                    <input type="submit" value="Ajouter dans mes contacts" class="btn btn-primary">
-                </form>
-            </div>
-        </div>
+        <form method="post" action="{{ path('carnet_app_profile', {'username':user.username}) }}" class="form-inline">
+            <input type="submit" value="Ajouter dans mes contacts" class="btn btn-primary">
+        </form>
     {% endif %}
     {% for msg in app.session.flashbag.get('confirm') %}
         <p class="text-center text-success">{{ msg }}</p>

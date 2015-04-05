@@ -24,6 +24,9 @@
     <p class="text-center text-info">
         Vous pouvez choisir de décocher des contacts de votre liste pour les supprimer de votre carnet.
     </p>
+    {% for msg in app.session.flashbag.get('confirm') %}
+        <small class="text-center text-success">{{ msg }}</small>
+    {% endfor %}
 {% endblock %}
 
 

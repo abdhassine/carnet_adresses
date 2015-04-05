@@ -28,13 +28,13 @@ L'ajout d'un contact est direct, il n'y a pas de système de requête auprès du
 On peut sur cette page entrer son login et mot de passe pour se connecter à l'application. <br>
 On peut également créer un compte. <br>
 **Vue -> login.html.twig** se trouvant dans le Bundle CarnetAdressesUserBundle <br>
-**Route -> /login**
+**Route -> /login/**
 
 
 ### La page d'inscription
 On peut sur cette page s'inscrire sur le site en créant un compte. <br>
 **Vue -> register.html.twig** se trouvant dans le Bundle CarnetAdressesUserBundle <br>
-**Route -> /register**
+**Route -> /register/**
 
 ### La page de profil
 Sur la page de profil, on peut consulter les informations sur son compte, une liste de contacts. <br>
@@ -52,6 +52,11 @@ où username est le pseudo du profil à afficher
 Sur cette page, on peut modifier ses informations personnelles. <br>
 **Vue -> edit.html.twig** se trouvant dans le Bundle CarnetAdressesUserBundle pour l'utilisateur connecté <br>
 **Route -> /profile/edit/**
+
+### La page de modification de mot de passe
+Depuis la page d'édition de profil, on peut accéder à cette page pour modifier son mot de passe. <br>
+**Vue -> changePassword.html.twig** se trouvant dans le bundle CarnetAdressesUserBundle
+**Route -> /profile/change-password/**
 
 ### La page des contacts
 Sur cette page, on peut lister les contacts de son carnet d'adresses.

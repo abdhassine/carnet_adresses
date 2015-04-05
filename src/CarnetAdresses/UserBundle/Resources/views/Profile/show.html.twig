@@ -21,6 +21,10 @@
 {% block header %}
     {{ parent() }}
     <h3> Profil du membre <b>{{ user.username }}</b></h3>
+    
+    {% for msg in app.session.flashbag.get('fos_user_success') %}
+        <p class="text-center text-success">{{ msg|trans({}, 'FOSUserBundle') }}</p>
+    {% endfor %}
 {% endblock %}
 
 

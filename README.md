@@ -75,25 +75,25 @@ J'ai décidé de séparer le côté carnet d'adresses et utilisateur pour avoir 
 
 ### AppBundle
 * AddressBook -> représente le carnet d'adresses en relation OneToOne avec un utilisateur qui est son propriétaire
-et en relation ManyToMany avec les contacts présents dans le carnet, car un utilisateur peut se trouver dans plusieurs carnets d'adresses.
+et en relation ManyToMany avec les contacts présents dans le carnet, car un utilisateur peut se trouver dans plusieurs carnets d'adresses. <br>
 Il est défini par :
-- son id
-- son owner
-- ses contacts
+    - son id
+    - son owner
+    - ses contacts
 
 ### UserBundle
 Le bundle est le fils de FOSUserBundle
-* User -> il étend le User de FOSUserBundle.
+* User -> il étend le User de FOSUserBundle. <br>
 Il est défini par :
-- son id
-- son username
-- son e-mail
-- son password
-- son firstname
-- son surname
-- son address
-- son phonenumber
-- son siteweb
+    - son id
+    - son username
+    - son e-mail
+    - son password
+    - son firstname
+    - son surname
+    - son address
+    - son phonenumber
+    - son siteweb
 
 
 ## Les vues

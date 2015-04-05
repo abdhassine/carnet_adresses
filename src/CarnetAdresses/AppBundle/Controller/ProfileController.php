@@ -5,6 +5,7 @@ namespace CarnetAdresses\AppBundle\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\HttpFoundation\Request;
 
 use CarnetAdresses\UserBundle\Entity\User;
 
@@ -39,7 +40,7 @@ class ProfileController extends ContainerAware {
     }
     
     
-    public function addAction(User $user) {
+    public function addAction(Request $request, User $user) {
         $userSession = $this->container->get('security.context')->getToken()->getUser();
         
         $em = $this->container->get('doctrine')->getManager();
@@ -47,6 +48,9 @@ class ProfileController extends ContainerAware {
         $book->addContact($user);
         $em->persist($book);
         $em->flush();
+        
+        $session = $request->getSession();
+        $session->getFlashBag()->add('confirm', $user->getUsername().' a bien été ajouté à vos contacts.');
         
         return new RedirectResponse($this->container->get('router')->generate('carnet_app_profile', array(
             'username' => $user->getUsername()

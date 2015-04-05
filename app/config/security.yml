@@ -27,7 +27,7 @@ security:
             logout:
                 path:          fos_user_security_logout
                 target:        /
-            anonymous:         true
+            anonymous:         ~
             remember_me:
                 key:           %secret%
 
@@ -36,3 +36,6 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/profile/, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/view/, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/search/, role: IS_AUTHENTICATED_FULLY }

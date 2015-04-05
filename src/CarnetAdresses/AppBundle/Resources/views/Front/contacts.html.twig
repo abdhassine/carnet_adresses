@@ -30,7 +30,7 @@
 {% block content %}
     <div class="row">
         <div class="col-lg-8 col-md-offset-2">
-            {% if contactsForm is defined %}
+            {% if contactsForm is not null %}
             {{ form_start(contactsForm, { 'action':path('carnet_app_contacts', {'username':username}) } ) }}
                 <table class="table table-hover">
                     <caption class="lead"><i>Vos contacts</i></caption>

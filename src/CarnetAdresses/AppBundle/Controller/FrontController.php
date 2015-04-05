@@ -31,7 +31,7 @@ class FrontController extends Controller {
         $request = $this->get('request_stack')->getCurrentRequest();
         
         if ($request->getMethod() == 'POST') {
-            return $this->forward('CarnetAdressesAppBundle:Profile:add', array('user' => $user));
+            return $this->forward('CarnetAdressesAppBundle:Profile:add', array('request' => $request, 'user' => $user));
         }
 
         return $this->forward('CarnetAdressesAppBundle:Profile:show', array('user' => $user));

@@ -12,7 +12,7 @@ carnet_app_profile:
 
 # route vers la page de listing des contacts de l'utilisateur : contacts.html.twig
 carnet_app_contacts:
-    path: /contacts/
+    path: /profile/contacts/
     defaults: { _controller: 'CarnetAdressesAppBundle:Front:contacts' }
 
 # route vers la page de recherche de contact : search.html.twig

@@ -30,6 +30,9 @@
             </div>
         </div>
     {% endif %}
+    {% for msg in app.session.flashbag.get('confirm') %}
+        <p class="text-center text-success">{{ msg }}</p>
+    {% endfor %}
 {% endblock %}
 
 

@@ -4,8 +4,14 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="{{ asset('bundles/carnetadressesapp/css/bootstrap.min.css') }}" rel="stylesheet" />
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        
+        {% block stylesheets %}
+            {% stylesheets 'bundles/carnetadressesapp/css/*' filter='cssrewrite' %}
+                <link href="{{ asset_url }}" rel="stylesheet" />
+            {% endstylesheets %}
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        {% endblock %}
+        
         <title>{% block title %}CarnetApp{% endblock %}</title>
     </head>
 

@@ -17,25 +17,23 @@
 {% block fos_user_content %}
     <div class="row"> <!-- bloc connexion-->
         <div class="col-md-6 col-sm-offset-3">
-            <div class="well">
-                {% if error %}
-                    <p class="text-danger bg-danger">{{ error|trans({}, 'FOSUserBundle') }}</p>
-                {% endif %}
-                <form action="{{ path("fos_user_security_check") }}" method="post" class="form-signin">
-                    <h2 class="form-signin-heading">Se connecter</h2>
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-                    <input type="text" id="username" name="_username" value="{{ last_username }}" required autofocus placeholder="{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}" class="form-control input-lg" />
-                    <input type="password" id="password" name="_password" required placeholder="{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}" class="form-control input-lg" />
+            {% if error %}
+                <p class="text-danger bg-danger">{{ error|trans({}, 'FOSUserBundle') }}</p>
+            {% endif %}
+            <form action="{{ path("fos_user_security_check") }}" method="post" class="form-signin">
+                <h2 class="form-signin-heading">Se connecter</h2>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                <input type="text" id="username" name="_username" value="{{ last_username }}" required autofocus placeholder="{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}" class="form-control input-lg" />
+                <input type="password" id="password" name="_password" required placeholder="{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}" class="form-control input-lg" />
 
-                    <div class="checkbox">
-                        <label for="remember_me">
-                            <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                <div class="checkbox">
+                    <label for="remember_me">
+                        <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
                         {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
-                        </label>
-                    </div>
-                    <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" class="btn btn-success btn-block btn-lg" />
-                </form>
-            </div><!-- end block well-->
+                    </label>
+                </div>
+                <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" class="btn btn-success btn-block btn-lg" />
+            </form>
         </div><!-- end block col -->
     </div>
 

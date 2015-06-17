@@ -12,4 +12,19 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository {
     
+    public function getUserData($username) {
+        $builder = $this->createQueryBuilder('u');
+        $builder->select('u.username')
+                ->addSelect('u.email')
+                ->addSelect('u.firstname')
+                ->addSelect('u.surname')
+                ->addSelect('u.phonenumber')
+                ->addSelect('u.address')
+                ->addSelect('u.siteweb')
+                ->where('u.username = :username')
+                ->setParameter('username', $username)
+        ;
+        
+        return $builder->getQuery()->getOneOrNullResult();
+    }
 }

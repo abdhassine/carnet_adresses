@@ -2,3 +2,10 @@ services:
 #    carnet_adresses_app.example:
 #        class: CarnetAdresses\AppBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+    carnet_adresses_app.contacts_handler:
+        class: CarnetAdresses\AppBundle\Handler\ContactsHandler
+        arguments: [@doctrine.orm.entity_manager, 'CarnetAdressesAppBundle:AddressBook']
+        
+    carnet_adresses_app.profile_handler:
+        class: CarnetAdresses\AppBundle\Handler\ProfileHandler
+        arguments: [@doctrine.orm.entity_manager, 'CarnetAdressesUserBundle:User']

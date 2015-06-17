@@ -3,6 +3,9 @@
 parameters:
 #    parameter_name: value
 
+imports:
+    - { resource: @CarnetAdressesAppBundle/Resources/config/services.yml }
+
 services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName

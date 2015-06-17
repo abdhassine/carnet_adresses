@@ -5,13 +5,18 @@ namespace CarnetAdresses\UserBundle\Entity;
 
 use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\EquatableInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 
 /**
  * @ORM\Entity(repositoryClass="CarnetAdresses\UserBundle\Entity\UserRepository")
  * @ORM\Table(name="user_table")
+ * @ExclusionPolicy("all")
  */
-class User extends BaseUser {
+class User extends BaseUser implements EquatableInterface {
     /**
      * @ORM\Id
      * @ORM\Column(name="id_user", type="integer")
@@ -21,26 +26,31 @@ class User extends BaseUser {
     
     /**
      * @ORM\Column(name="firstname", type="string", length=30, nullable=false)
+     * @Expose
      */
     private $firstname;
     
     /**
      * @ORM\Column(name="surname", type="string", length=30, nullable=false)
+     * @Expose
      */
     private $surname;
     
     /**
      * @ORM\Column(name="address", type="string", nullable=true)
+     * @Expose
      */
     private $address;
     
     /**
      * @ORM\Column(name="phonenumber", type="string", length=10, nullable=true)
+     * @Expose
      */
     private $phonenumber;
 
     /**
      * @ORM\Column(name="siteweb", type="string", nullable=true)
+     * @Expose
      */
     private $siteweb = null;
     
@@ -177,4 +187,16 @@ class User extends BaseUser {
         return (string)$str;
     }
     
+    
+    public function isEqualTo(UserInterface $user) {
+        if ($this->username !== $user->getUsername()) {
+            return false;
+        }
+        
+        if ($this->password !== $user->getPassword()) {
+            return false;
+        }
+        
+        return true;
+    }
 }

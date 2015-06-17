@@ -1,0 +1,9 @@
+carnet_adresses_app_contacts_rest:
+    type: rest
+    resource: CarnetAdressesAppBundle:Api/ContactsRest
+    name_prefix: api_contacts_
+    
+carnet_adresses_app_profile_rest:
+    type: rest
+    resource: CarnetAdressesAppBundle:Api/ProfileRest
+    name_prefix: api_profile_

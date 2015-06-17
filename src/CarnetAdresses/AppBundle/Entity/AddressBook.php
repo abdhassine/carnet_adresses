@@ -4,6 +4,8 @@ namespace CarnetAdresses\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 use CarnetAdresses\UserBundle\Entity\User;
 
@@ -13,6 +15,7 @@ use CarnetAdresses\UserBundle\Entity\User;
  *
  * @ORM\Table(name="addressbook_table")
  * @ORM\Entity(repositoryClass="CarnetAdresses\AppBundle\Entity\AddressBookRepository")
+ * @ExclusionPolicy("all")
  */
 class AddressBook {
     /**
@@ -25,6 +28,7 @@ class AddressBook {
     /**
      * @ORM\OneToOne(targetEntity="CarnetAdresses\UserBundle\Entity\User", cascade={"remove"})
      * @ORM\JoinColumn(name="id_owner", referencedColumnName="id_user", nullable=false)
+     * @Expose
      */
     private $owner;
     
@@ -34,6 +38,7 @@ class AddressBook {
      *          joinColumns={@ORM\JoinColumn(name="id_addressbook", referencedColumnName="id_addressbook")},
      *          inverseJoinColumns={@ORM\JoinColumn(name="id_contact", referencedColumnName="id_user")}
      * )
+     * @Expose
      */
     private $contacts;
     

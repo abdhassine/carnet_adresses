@@ -11,11 +11,6 @@ use CarnetAdresses\AppBundle\Entity\AddressBook;
 
 class RegistrationController extends BaseController {
     
-    public function registerAction() {
-        return parent::registerAction();
-    }
-    
-    
     public function authenticateUser(UserInterface $user, Response $response) {
         parent::authenticateUser($user, $response);
         
